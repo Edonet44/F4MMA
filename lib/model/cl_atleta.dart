@@ -158,18 +158,18 @@ class AtletiManager extends Atleti {
       }
       //capire come gestire i valori nulli senza il required
       return AtletiManager(
-          jsonMap["uid"],
-          jsonMap["nome"],
+          jsonMap["uid"] ?? 0,
+          jsonMap["nome"] ?? "vuoto",
           titoli,
           friends,
-          jsonMap["forza"],
-          jsonMap["destrezza"],
-          jsonMap["stamina"],
-          jsonMap["striking"],
-          jsonMap["groundgame"],
-          jsonMap["criticalstrike"],
-          jsonMap["data"],
-          jsonMap["immagine"]
+          jsonMap["forza"] ?? 0,
+          jsonMap["destrezza"] ?? 0,
+          jsonMap["stamina"] ?? 0,
+          jsonMap["striking"] ?? 0,
+          jsonMap["groundgame"] ?? 0,
+          jsonMap["criticalstrike"] ?? 0,
+          jsonMap["data"] ?? "vuoto",
+          jsonMap["immagine"] ?? "vuoto"
 
           //json con required nelle variabili
           // forza: json == null ? 0 : jsonMap["forza"],
@@ -229,13 +229,28 @@ void main() {
   print(atleta1); // stampa la lista aggiornata
 
   ///test per serializzazione json
-  var jsonPerson = '{"name": "Giovanni Verdi", "age": 42}';
-  var decodedPerson = jsonDecode(jsonPerson);
-  var personFromJson = AtletiManager.fromJson(decodedPerson);
-  print(personFromJson.toJson());
+  // var jsonPerson = {
+  //   "uid": 1,
+  //   "nome": "Jhonny B Bones",
+  //   "titoli": [{"Ufc Welter 4 position", "K1 Bad", "Wdba 10 position"}],
+  //   "hype": [10],
+  //   "forza": 50,
+  //   "destrezza": 10,
+  //   "stamina": 30,
+  //   "striking": 40,
+  //   "groundgame": 12,
+  //   "criticalStrike": 7,
+  //   "immagine": "",
+  //   "data": ""
+  // };
+  // var decodedPerson = jsonDecode(jsonPerson);
+  // var personFromJson = AtletiManager.fromJson(decodedPerson);
+  // print(personFromJson.toJson());
 
 // Test json
-// String jsonStr = '{"name": "Alice", "age": null, "addresses": [{"street": "123 Main St", "city": null}, {"street": "456 Elm St", "city": "Boston"}]}';
+// String jsonStr = '{"name": "Alice", "age": null, "addresses":
+//[{"street": "123 Main St", "city": null},
+//{"street": "456 Elm St", "city": "Boston"}]}';
 
 //   try {
 //     var person = Person.fromJson(jsonStr);

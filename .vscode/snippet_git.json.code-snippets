@@ -1,0 +1,12 @@
+{
+	"Git Commit": {
+		"prefix": "git-commit",
+		"body": [
+		  "git add .",
+		  "git commit -m \"$1\"",
+		  "git push"
+		],
+		"description": "Git Commit Shortcut"
+	  }
+	  
+}

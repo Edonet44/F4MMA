@@ -86,6 +86,8 @@ class AtletiManager extends Atleti {
   final int striking;
   final int groundgame;
   final int criticalstrike;
+  final int salute;
+  final int money;
   final String data;
   final String immagine;
   List<Atleti> atletiList = [];
@@ -101,6 +103,8 @@ class AtletiManager extends Atleti {
     this.striking,
     this.groundgame,
     this.criticalstrike,
+    this.salute,
+    this.money,
     this.data,
     this.immagine,
   ) : super(uid, nome);
@@ -168,6 +172,8 @@ class AtletiManager extends Atleti {
           jsonMap["striking"] ?? 0,
           jsonMap["groundgame"] ?? 0,
           jsonMap["criticalstrike"] ?? 0,
+          jsonMap["salute"] ?? 0,
+          jsonMap["money"] ?? 0,
           jsonMap["data"] ?? "vuoto",
           jsonMap["immagine"] ?? "vuoto");
     } on FormatException {
@@ -190,19 +196,21 @@ class AtletiManager extends Atleti {
         'Striking': striking,
         'GroundGame': groundgame,
         'CriticalStrike': criticalstrike,
+        'Salute': salute,
+        'Borsa': money,
         'Immagine': immagine,
         'Data': data
       };
 
   @override
   String toString() {
-    return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Immagine:$immagine Data: $data';
+    return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Striking:$striking,Groundgame:$groundgame,Salute:$salute,:$money,$immagine Data: $data';
   }
 }
 
 void main() {
 //Test creazione atleta
-  var atleti = <AtletiManager>[];
+  /*  var atleti = <AtletiManager>[];
   var titoli = <Titoli>[];
   var fans = <FriendsFan>[];
 
@@ -223,7 +231,7 @@ void main() {
   print(atleta1._uid);
   print(atleta1.nome);
   print(atleta1); // stampa la lista aggiornata
-
+ */
   ///test per serializzazione json
   // var jsonPerson = {
   //   "uid": 1,

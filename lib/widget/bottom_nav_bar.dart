@@ -7,7 +7,7 @@ import 'package:f4mma/screens/screen.dart';
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({Key? key, required this.index}) : super(key: key);
 
-   final int index;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
           BottomNavigationBarItem(
               icon: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, discoverScreen.routeName);
+                    Navigator.pushNamed(context, MatchScreen.routeName);
                   },
                   icon: const Icon(Icons.person)),
               label: 'Cerca'),

@@ -1,3 +1,4 @@
+[
 {
   "Giocatore1": {
     "uid":1,
@@ -12,6 +13,8 @@
       "stamina":30,
       "striking":40,
       "groundgame":12,
+      "salute":10,
+      "money":10,
       "criticalStrike":7,
       "immagine":"",
       "data":""
@@ -28,6 +31,8 @@
       "stamina":10,
       "striking":30,
       "groundgame":10,
+      "salute":10,
+      "money":10,
       "criticalStrike":22,
       "immagine":"",
       "data":""
@@ -45,6 +50,8 @@
       "stamina":30,
       "striking":20,
       "groundgame":30,
+      "salute":10,
+      "money":10,
       "criticalStrike":10,
       "immagine":"",
       "data":""
@@ -62,6 +69,8 @@
       "stamina":30,
       "striking":50,
       "groundgame":40,
+      "salute":10,
+      "money":10,
       "criticalStrike":27,
       "immagine":"",
       "data":""
@@ -79,8 +88,11 @@
       "stamina":20,
       "striking":40,
       "groundgame":32,
+      "salute":10,
+      "money":10,
       "criticalStrike":17,
       "immagine":"",
       "data":""
   }
 }
+]

@@ -1,4 +1,4 @@
-import 'package:f4mma/screens/welcome.dart';
+import 'package:f4mma/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/screen.dart';
 
@@ -20,9 +20,9 @@ class Myapp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          HomeScreen.routeName: (context) => const Welcome1(),
-          discoverScreen.routeName: (context) => const discoverScreen(),
-          articleScreen.routeName: (context) => articleScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          MatchScreen.routeName: (context) => const MatchScreen(),
+          articleScreen.routeName: (context) => const articleScreen(),
         });
   }
 }

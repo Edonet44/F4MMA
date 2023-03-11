@@ -4,13 +4,15 @@ import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:f4mma/model/cl_atleta.dart';
 
+import 'cl_api_player.dart';
+
 ///Classe per la creazione dei Match
 ///utlizzo dell'algoritmo Swiss system turnament
 ///utilizzo dell algoritmo di confronto a curva di probabilità
 ///
 ///
 
-class Match {
+class Incontri {
   /// 1 recupero i valori di ogni singolo giocatore dal file players_config.json
   /// 2 creare i match
   /// 3 creare il metodo di confronto
@@ -19,12 +21,11 @@ class Match {
   //shuffle players
 
 //creo una funzione per il recupero del file .json
-  Future<String> loadJson() async {
+  Future<List<Player>?> loadJson() async {
     try {
       final jsonString =
           await rootBundle.loadString('assets/api/players_config.json');
-      final jsonData = json.decode(jsonString);
-      return jsonData;
+      return playerFromJson(jsonString);
     } catch (e) {
       print(e);
     }
@@ -32,18 +33,18 @@ class Match {
   }
 
 //crea i match
-  void Creamatches() {
-    //istanzio la classe atleti con un array vuoto
-    final List<List<Atleti>> matches = [];
-    final AtletiManager atleti;
-    //recupero valori file json
-    final String jstring = Match().loadJson().toString();
-    //istanza della classe atleta che ritorna un array dinamico
-    final List atleta = AtletiManager.fromJson(jstring) as List;
+  void Creamatches(List player) {
+    try {
+      //istanzio la classe atleti con un array vuoto
+      final List<List<Atleti>> matches = [];
+      final AtletiManager atleti;
 
-    for (var i = 0; i < atleta.length; i++) {
-      //itero per la lunghezza dell
-      final List<Match> roundMatch = [];
+      for (var i = 0; i < player.length; i++) {
+        //itero per la lunghezza dell
+        final List<Match> roundMatch = [];
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }
@@ -63,7 +64,6 @@ void main() {
   // } on Exception catch (e) {
   //   print('Errore: $e');
   // }
-  Match().Creamatches();
 }
 
 ///classe con algoritmo di probabilità che confronta due giocatori in base a dei valori passati

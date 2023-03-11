@@ -88,6 +88,7 @@ class AtletiManager extends Atleti {
   final int criticalstrike;
   final int salute;
   final int money;
+  int punteggio;
   final String data;
   final String immagine;
   List<Atleti> atletiList = [];
@@ -105,6 +106,7 @@ class AtletiManager extends Atleti {
     this.criticalstrike,
     this.salute,
     this.money,
+    this.punteggio,
     this.data,
     this.immagine,
   ) : super(uid, nome);
@@ -174,6 +176,7 @@ class AtletiManager extends Atleti {
           jsonMap["criticalstrike"] ?? 0,
           jsonMap["salute"] ?? 0,
           jsonMap["money"] ?? 0,
+          jsonMap["punteggio"] ?? 0,
           jsonMap["data"] ?? "vuoto",
           jsonMap["immagine"] ?? "vuoto");
     } on FormatException {
@@ -198,13 +201,14 @@ class AtletiManager extends Atleti {
         'CriticalStrike': criticalstrike,
         'Salute': salute,
         'Borsa': money,
+        'Punteggio': punteggio,
         'Immagine': immagine,
         'Data': data
       };
 
   @override
   String toString() {
-    return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Striking:$striking,Groundgame:$groundgame,Salute:$salute,:$money,$immagine Data: $data';
+    return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Striking:$striking,Groundgame:$groundgame,Salute:$salute,:$money,Punteggio:$punteggio,$immagine Data: $data';
   }
 }
 

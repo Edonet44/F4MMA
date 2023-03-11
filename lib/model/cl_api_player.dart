@@ -56,6 +56,7 @@ class Giocatore {
     required this.groundgame,
     required this.salute,
     required this.money,
+    required this.punteggio,
     required this.criticalStrike,
     required this.immagine,
     required this.data,
@@ -72,6 +73,7 @@ class Giocatore {
   int groundgame;
   int salute;
   int money;
+  int punteggio;
   int criticalStrike;
   String immagine;
   String data;
@@ -88,6 +90,7 @@ class Giocatore {
         groundgame: json["groundgame"],
         salute: json["salute"],
         money: json["money"],
+        punteggio: json["punteggio"],
         criticalStrike: json["criticalStrike"],
         immagine: json["immagine"],
         data: json["data"],
@@ -105,6 +108,7 @@ class Giocatore {
         "groundgame": groundgame,
         "salute": salute,
         "money": money,
+        "punteggio": punteggio,
         "criticalStrike": criticalStrike,
         "immagine": immagine,
         "data": data,

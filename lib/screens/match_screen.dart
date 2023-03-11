@@ -31,6 +31,16 @@ class _MatchScreenState extends State<MatchScreen> {
     }
   }
 
+  Tomatch() {
+    try {
+      List<Giocatore>? playerNames =
+          player!.map((player) => player).cast<Giocatore>().toList();
+      Incontri().Creamatches(playerNames);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +55,7 @@ class _MatchScreenState extends State<MatchScreen> {
           children: [
             Row(
               //inserire oggetto di profilo
-              children: <Widget>[],
+              children: <Widget>[Tomatch()],
             )
           ],
         )));

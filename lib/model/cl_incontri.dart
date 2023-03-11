@@ -20,6 +20,7 @@ class Incontri {
 
   //shuffle players
 
+//1
 //creo una funzione per il recupero del file .json
   Future<List<Player>?> loadJson() async {
     try {
@@ -32,16 +33,45 @@ class Incontri {
     throw (e);
   }
 
+//2
 //crea i match
-  void Creamatches(List player) {
+  void Creamatches(List<Giocatore>? giocatori) {
+    // var punteggio = 0;
     try {
       //istanzio la classe atleti con un array vuoto
-      final List<List<Atleti>> matches = [];
-      final AtletiManager atleti;
-
-      for (var i = 0; i < player.length; i++) {
-        //itero per la lunghezza dell
-        final List<Match> roundMatch = [];
+      final List<List<Giocatore>> matches = [];
+      //final AtletiManager atleti;
+      //itero per la lunghezza dei giocatori
+      for (var i = 0; i < giocatori!.length; i++) {
+        //creo una lista per i round
+        final List<Giocatore> roundMatches = [];
+        //aggiungo alla lista tutti i giocatori
+        roundMatches.add(giocatori[i]);
+        for (var j = i + 1; j < giocatori.length; j++) {
+          roundMatches.add(giocatori[j]);
+        }
+        matches.add(roundMatches);
+        //gioca i match
+        for (var i = 0; i < matches.length; i++) {
+          print('Round ${i + 1}');
+          for (final match in matches[i]) {
+            final random = Random();
+            final result = random.nextInt(2);
+            if (result == 0) {
+              match.punteggio++;
+              print('${match.nome} vittoria!');
+            } else {
+              print('${match.nome} sconfitta!');
+            }
+          }
+          //ordina per punteggio
+          matches[i].sort((a, b) => b.punteggio.compareTo(a.punteggio));
+          //stampa per punteggio
+          print('punteggio');
+          for (final match in matches[i]) {
+            print('${match.nome}${match.punteggio}');
+          }
+        }
       }
     } catch (e) {
       print(e);
@@ -65,7 +95,7 @@ void main() {
   //   print('Errore: $e');
   // }
 }
-
+//3
 ///classe con algoritmo di probabilità che confronta due giocatori in base a dei valori passati
 /* import 'dart:math';
 

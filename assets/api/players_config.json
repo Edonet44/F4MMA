@@ -1,0 +1,86 @@
+{
+  "Giocatore1": {
+    "uid":1,
+    "nome": "Jhonny B Bones",
+    "titoli": [
+      "Ufc Welter 4 position",
+      "K1 Bad",
+      "Wdba 10 position"],
+      "hype":[10],
+      "forza":50,
+      "destrezza":10,
+      "stamina":30,
+      "striking":40,
+      "groundgame":12,
+      "criticalStrike":7,
+      "immagine":"",
+      "data":""
+  },
+  "Giocatore2": {
+    "uid":1,
+    "nome": "Bob Patt Slap",
+    "titoli": [
+      "Ufc Welter 8 position",
+      "Wdba 10 position"],
+      "hype":[50],
+      "forza":20,
+      "destrezza":20,
+      "stamina":10,
+      "striking":30,
+      "groundgame":10,
+      "criticalStrike":22,
+      "immagine":"",
+      "data":""
+  },
+  "Giocatore3": {
+    "uid":1,
+    "nome": "UnderTanker The Kids",
+    "titoli": [
+      "Ufc Welter 3 position",
+      "K1 Bad",
+      "Wdba 10 position"],
+      "hype":[70],
+      "forza":20,
+      "destrezza":50,
+      "stamina":30,
+      "striking":20,
+      "groundgame":30,
+      "criticalStrike":10,
+      "immagine":"",
+      "data":""
+  },
+  "Giocatore4": {
+    "uid":1,
+    "nome": "Kav Nanto",
+    "titoli": [
+      "Ufc Welter 2 position",
+      "K1 Look dwon",
+      "Wdba 2 position"],
+      "hype":[60],
+      "forza":30,
+      "destrezza":40,
+      "stamina":30,
+      "striking":50,
+      "groundgame":40,
+      "criticalStrike":27,
+      "immagine":"",
+      "data":""
+  },
+  "Giocatore5": {
+    "uid":1,
+    "nome": "Terrox the Ferrox",
+    "titoli": [
+      "Ufc Welter 4 position",
+      "K1 Bad",
+      "Wdba 10 position"],
+      "hype":[60],
+      "forza":20,
+      "destrezza":20,
+      "stamina":20,
+      "striking":40,
+      "groundgame":32,
+      "criticalStrike":17,
+      "immagine":"",
+      "data":""
+  }
+}

@@ -14,10 +14,10 @@ class Atleti {
   );
 
   int get uid => _uid;
-  set uid(int name) => _uid = uid;
+  set uid(int uid) => _uid = uid;
 
   String get nome => _nome;
-  set name(String name) => _nome = name;
+  set name(String nome) => _nome = nome;
 
 //recupero dati json
   factory Atleti.fromJson(Map<String, dynamic> json) {
@@ -156,7 +156,7 @@ class AtletiManager extends Atleti {
           titoli.add(titles);
         }
       }
-      //capire come gestire i valori nulli senza il required
+
       return AtletiManager(
           jsonMap["uid"] ?? 0,
           jsonMap["nome"] ?? "vuoto",
@@ -169,11 +169,7 @@ class AtletiManager extends Atleti {
           jsonMap["groundgame"] ?? 0,
           jsonMap["criticalstrike"] ?? 0,
           jsonMap["data"] ?? "vuoto",
-          jsonMap["immagine"] ?? "vuoto"
-
-          //json con required nelle variabili
-          // forza: json == null ? 0 : jsonMap["forza"],
-          );
+          jsonMap["immagine"] ?? "vuoto");
     } on FormatException {
       throw Exception("C'e un errore nella codifica del file Json");
     } catch (e) {

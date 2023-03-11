@@ -1,0 +1,57 @@
+{
+    "gameTitle": "F4MMA",
+    "gameVersion": "1.0.0",
+    "gameSettings": {
+      "difficulty": {
+        "easy": {
+          "enemyHealthMultiplier": 0.5,
+          "playerDamageMultiplier": 2
+        },
+        "medium": {
+          "enemyHealthMultiplier": 1,
+          "playerDamageMultiplier": 1
+        },
+        "hard": {
+          "enemyHealthMultiplier": 2,
+          "playerDamageMultiplier": 0.5
+        }
+      },
+      "graphics": {
+        "quality": {
+          "low": {
+            "textureResolution": 512,
+            "shadowQuality": "low"
+          },
+          "medium": {
+            "textureResolution": 1024,
+            "shadowQuality": "medium"
+          },
+          "high": {
+            "textureResolution": 2048,
+            "shadowQuality": "high"
+          }
+        },
+        "fullscreen": true
+      },
+      "audio": {
+        "volume": {
+          "music": 0.5,
+          "soundEffects": 0.8
+        }
+      }
+    },
+    "controls": {
+      "keyboard": {
+        "moveUp": "W",
+        "moveDown": "S",
+        "moveLeft": "A",
+        "moveRight": "D",
+        "shoot": "SPACE"
+      },
+      "gamepad": {
+        "moveAxis": "LeftStick",
+        "shootButton": "A"
+      }
+    }
+  }
+  

@@ -22,6 +22,7 @@ class _MatchScreenState extends State<MatchScreen> {
     getdata();
   }
 
+//recupero json
   getdata() async {
     player = await Incontri().loadJson();
     if (player != null) {

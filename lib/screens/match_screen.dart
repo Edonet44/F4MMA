@@ -55,7 +55,7 @@ class _MatchScreenState extends State<MatchScreen> {
           children: [
             Row(
               //inserire oggetto di profilo
-              children: <Widget>[Tomatch()],
+              children: <Widget>[],
             )
           ],
         )));

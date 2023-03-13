@@ -33,9 +33,26 @@ class _MatchScreenState extends State<MatchScreen> {
 
   Tomatch() {
     try {
-      List<Giocatore>? playerNames =
-          player!.map((player) => player).cast<Giocatore>().toList();
-      Incontri().Creamatches(playerNames);
+      //Prima di poter effettuare il casting in un altro tipo di classe bisogna passare dalla classe Stringa
+      //successivamente si puo passare all oggetto desiderato in questo Giocatore
+
+      List<Giocatore> giocatori = [];
+      for (var atleta in player!) {
+        giocatori.add(atleta.giocatore1);
+        giocatori.add(atleta.giocatore2);
+        giocatori.add(atleta.giocatore3);
+        giocatori.add(atleta.giocatore4);
+        giocatori.add(atleta.giocatore5);
+      }
+
+      // List firstgoString = player!.map((player) =>
+      // player.giocatore1.nome).toList();
+      // List<Giocatore> giocatori = firstgoString.map((name) => Giocatore(, 0)).toList();
+      //  List<Giocatore>? playerNames =
+      //     player!.map((player) => player).cast<Giocatore>().toList();
+      // Incontri().Creamatches(playerNames);
+      Incontri().Creamatches(giocatori);
+      //Incontri().Creamatches(player!.cast<Giocatore>());
     } catch (e) {
       print(e);
     }
@@ -55,7 +72,13 @@ class _MatchScreenState extends State<MatchScreen> {
           children: [
             Row(
               //inserire oggetto di profilo
-              children: <Widget>[],
+              children: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      Tomatch();
+                    },
+                    child: Text("Combatti")),
+              ],
             )
           ],
         )));

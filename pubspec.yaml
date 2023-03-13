@@ -62,9 +62,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/1.png
     - assets/api/players_config.json
     - assets/api/game_config.json
+    - assets/images/Ufc_logo.png
+    - assets/images/gallo/sterling.png
+    - assets/images/gallo/cruz.png
+    - assets/images/gallo/cory.png
+    - assets/images/gallo/davil.png
+    - assets/images/gallo/font.png
+    - assets/images/gallo/malley.png
+    - assets/images/gallo/muhnoz.png
+    - assets/images/gallo/song.png
+    - assets/images/gallo/sterling.png
+    - assets/images/gallo/umar.png
+    - assets/images/gallo/vera.png
+    - assets/images/gallo/yan.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Massaggi",
+                      "F4MMA",
                       style: IntestazioneTitolo,
                     ),
                   ],
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pranoterapia a Livorno",
+                    "CombatGames",
                     style: IntestazioneTitolo,
                   ),
                 ],
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 15, top: 10),
                 child: Image.asset(
-                  "assets/images/prenotazione_app/separatoreandlogo.png",
+                  "assets/images/separatoreandlogo.png",
                   width: 330,
                 ),
               )
@@ -68,8 +68,7 @@ class HomeScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   opacity: 240,
-                  image: AssetImage(
-                      "assets/images/prenotazione_app/logo-bckg.png"),
+                  image: AssetImage("assets/images/Ufc_logo.png"),
                   fit: BoxFit.cover),
             ),
             child: Row(
@@ -84,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
                             fit: BoxFit.fill,
-                            "assets/images/prenotazione_app/profilo/profilo.png",
+                            "assets/images/profilo.png",
                             width: 150,
                             height: 200,
                           ))
@@ -113,10 +112,20 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       const Padding(padding: EdgeInsets.only(left: 5)),
-                      Text(
-                        "Sono Luca Paone da sempre\nattivo nello sport.\nHo iniziato da giovane a praticare\natletica leggera\nper poi dedicarmi al rugby\nprima da giocatore e poi da allenatore.",
-                        style: DescrizioneProfiloHome,
-                      )
+                      RichText(
+                        text: TextSpan(
+                          text: 'Benvenuto',
+                          style: DefaultTextStyle.of(context).style,
+                          children: const <TextSpan>[
+                            TextSpan(
+                                text: 'bold',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(text: ' in F4mma!'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text("Scegli un tuo Atleta ed inizia a combattere!"),
                     ],
                   )
                 ]))
@@ -247,11 +256,17 @@ class Carousel extends StatefulWidget {
 class _CarouselState extends State<Carousel> {
   int _current = 0;
   final List<String> images = [
-    'assets/images/prenotazione_app/slider/1.png',
-    'assets/images/prenotazione_app/slider/2.png',
-    'assets/images/prenotazione_app/slider/3.png',
-    'assets/images/prenotazione_app/slider/4.png',
-    'assets/images/prenotazione_app/slider/5.png'
+    'assets/images/gallo/cory.png',
+    'assets/images/gallo/cruz.png',
+    'assets/images/gallo/davil.png',
+    'assets/images/gallo/font.png',
+    'assets/images/gallo/malley.png',
+    'assets/images/gallo/muhnoz.png',
+    'assets/images/gallo/song.png',
+    'assets/images/gallo/sterling.png',
+    'assets/images/gallo/umar.png',
+    'assets/images/gallo/vera.png',
+    'assets/images/gallo/yan.png',
   ];
 
   List<Widget> generateImageTiles() {

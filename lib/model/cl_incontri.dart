@@ -33,12 +33,12 @@ class Incontri {
     throw (e);
   }
 
-//2
-//crea i match
+//2   Version con giocatore
+  //crea i match
   void Creamatches(List<Giocatore>? giocatori) {
     // var punteggio = 0;
     try {
-      //istanzio la classe atleti con un array vuoto
+      //istanzio la classe giocatore con un array vuoto
       final List<List<Giocatore>> matches = [];
       //final AtletiManager atleti;
       //itero per la lunghezza dei giocatori
@@ -78,6 +78,51 @@ class Incontri {
     }
   }
 }
+
+/*  void Creamatches(List<Player>? player) {
+    var punteggio = 0;
+    try {
+      //istanzio la classe giocatore con un array vuoto
+      final List<List<Player>> matches = [];
+      //final AtletiManager atleti;
+      //itero per la lunghezza dei giocatori
+      for (var i = 0; i < player!.length; i++) {
+        //creo una lista per i round
+        final List<Player> roundMatches = [];
+        //aggiungo alla lista tutti i giocatori
+        roundMatches.add(player[i]);
+        for (var j = i + 1; j < player.length; j++) {
+          roundMatches.add(player[j]);
+        }
+        matches.add(roundMatches);
+        //gioca i match
+        for (var i = 0; i < matches.length; i++) {
+          print('Round ${i + 1}');
+          for (final match in matches[i]) {
+            final random = Random();
+            final result = random.nextInt(2);
+            if (result == 0) {
+              //match.punteggio++;
+              punteggio++;
+              print('${match.nome} vittoria!');
+            } else {
+              print('${match.nome} sconfitta!');
+            }
+          }
+          //ordina per punteggio
+          matches[i].sort((a, b) => b.punteggio.compareTo(a.punteggio));
+          //stampa per punteggio
+          print('punteggio');
+          for (final match in matches[i]) {
+            print('${match.nome}${match.punteggio}');
+          }
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+} */
 
 void main() {
   //testing per recupero dati da file json

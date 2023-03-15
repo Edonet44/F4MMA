@@ -13,6 +13,7 @@ class MatchScreen extends StatefulWidget {
 }
 
 class _MatchScreenState extends State<MatchScreen> {
+  //lista di player
   List<Player>? player;
   var isLoaded = false;
 
@@ -22,7 +23,7 @@ class _MatchScreenState extends State<MatchScreen> {
     getdata();
   }
 
-//recupero json
+//recupero json e passo alla lista di tipo player
   getdata() async {
     player = await Incontri().loadJson();
     if (player != null) {
@@ -32,11 +33,11 @@ class _MatchScreenState extends State<MatchScreen> {
     }
   }
 
+  //funzione che richiama la creazione dei match
   Tomatch() {
     try {
-      //Prima di poter effettuare il casting in un altro tipo di classe bisogna passare dalla classe Stringa
-      //successivamente si puo passare all oggetto desiderato in questo Giocatore
-
+      //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json ù
+      //aggiungo alla lista tutti i dati di ogni singolo giocatore
       List<Giocatore> giocatori = [];
       for (var atleta in player!) {
         giocatori.add(atleta.giocatore1);
@@ -46,14 +47,8 @@ class _MatchScreenState extends State<MatchScreen> {
         giocatori.add(atleta.giocatore5);
       }
 
-      // List firstgoString = player!.map((player) =>
-      // player.giocatore1.nome).toList();
-      // List<Giocatore> giocatori = firstgoString.map((name) => Giocatore(, 0)).toList();
-      //  List<Giocatore>? playerNames =
-      //     player!.map((player) => player).cast<Giocatore>().toList();
-      // Incontri().Creamatches(playerNames);
+      //istanza e richiamo funzione creamatch in classe cl_incontri con passaggio di variabile di tipo lista giocatore
       Incontri().Creamatches(giocatori);
-      //Incontri().Creamatches(player!.cast<Giocatore>());
     } catch (e) {
       print(e);
     }

@@ -137,6 +137,8 @@ class AtletiManager extends Atleti {
         'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Immagine:$immagine Data: $data');
   }
 
+  ///[deprecated]
+  ///funzione gia in utlizzo nella classe cl_api_player.dart
 //get atleta fromJson
   factory AtletiManager.fromJson(String jsonString) {
     try {

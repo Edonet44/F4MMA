@@ -79,21 +79,21 @@ class Giocatore {
   String data;
 
   factory Giocatore.fromJson(Map<String, dynamic> json) => Giocatore(
-        uid: json["uid"],
-        nome: json["nome"],
+        uid: json["uid"] ?? 0,
+        nome: json["nome"] ?? "vuoto",
         titoli: List<String>.from(json["titoli"].map((x) => x)),
         hype: List<int>.from(json["hype"].map((x) => x)),
-        forza: json["forza"],
-        destrezza: json["destrezza"],
-        stamina: json["stamina"],
-        striking: json["striking"],
-        groundgame: json["groundgame"],
+        forza: json["forza"] ?? 0,
+        destrezza: json["destrezza"] ?? 0,
+        stamina: json["stamina"] ?? 0,
+        striking: json["striking"] ?? 0,
+        groundgame: json["groundgame"] ?? 0,
         salute: json["salute"],
-        money: json["money"],
-        punteggio: json["punteggio"],
-        criticalStrike: json["criticalStrike"],
-        immagine: json["immagine"],
-        data: json["data"],
+        money: json["money"] ?? 0,
+        punteggio: json["punteggio"] ?? 0,
+        criticalStrike: json["criticalStrike"] ?? 0,
+        immagine: json["immagine"] ?? "vuoto",
+        data: json["data"] ?? "vuoto",
       );
 
   Map<String, dynamic> toJson() => {

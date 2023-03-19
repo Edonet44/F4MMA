@@ -21,7 +21,7 @@
         "data":""
     },
     "Giocatore2": {
-      "uid":1,
+      "uid":2,
       "nome": "Bob Patt Slap",
       "titoli": [
         "Ufc Welter 8 position",
@@ -40,7 +40,7 @@
         "data":""
     },
     "Giocatore3": {
-      "uid":1,
+      "uid":3,
       "nome": "UnderTanker The Kids",
       "titoli": [
         "Ufc Welter 3 position",
@@ -60,7 +60,7 @@
         "data":""
     },
     "Giocatore4": {
-      "uid":1,
+      "uid":4,
       "nome": "Kav Nanto",
       "titoli": [
         "Ufc Welter 2 position",
@@ -80,7 +80,7 @@
         "data":""
     },
     "Giocatore5": {
-      "uid":1,
+      "uid":5,
       "nome": "Terrox the Ferrox",
       "titoli": [
         "Ufc Welter 4 position",
@@ -96,6 +96,106 @@
         "money":10,
         "punteggio":0,
         "criticalStrike":17,
+        "immagine":"",
+        "data":""
+    },
+    "Giocatore6": {
+      "uid":6,
+      "nome": "Mad Max Trees",
+      "titoli": [
+        "Ufc LightWeigth 7 position",
+        "wwba 4 position ",
+        "Wdba 10 position"],
+        "hype":[30],
+        "forza":20,
+        "destrezza":10,
+        "stamina":40,
+        "striking":40,
+        "groundgame":30,
+        "salute":10,
+        "money":10,
+        "punteggio":0,
+        "criticalStrike":27,
+        "immagine":"",
+        "data":""
+    },
+    "Giocatore7": {
+      "uid":7,
+      "nome": "Peet Beet Ball",
+      "titoli": [
+        "Ufc LightWeight 8 position",
+        "K1 Bad",
+        "Wdba 10 position"],
+        "hype":[20],
+        "forza":33,
+        "destrezza":15,
+        "stamina":20,
+        "striking":20,
+        "groundgame":20,
+        "salute":10,
+        "money":10,
+        "punteggio":0,
+        "criticalStrike":17,
+        "immagine":"",
+        "data":""
+    },
+    "Giocatore8": {
+      "uid":8,
+      "nome": "Medieval Wild Warrior",
+      "titoli": [
+        "Ufc Welter 10 position",
+        "K1 Wtf",
+        "Wdba 11 position"],
+        "hype":[40],
+        "forza":15,
+        "destrezza":40,
+        "stamina":20,
+        "striking":20,
+        "groundgame":50,
+        "salute":10,
+        "money":10,
+        "punteggio":0,
+        "criticalStrike":22,
+        "immagine":"",
+        "data":""
+    },
+    "Giocatore9": {
+      "uid":9,
+      "nome": "Creative Crop Bond",
+      "titoli": [
+        "Ufc Welter 16 position",
+        "K1 Wtf",
+        "Wdba 11 position"],
+        "hype":[20],
+        "forza":25,
+        "destrezza":20,
+        "stamina":10,
+        "striking":20,
+        "groundgame":30,
+        "salute":20,
+        "money":10,
+        "punteggio":0,
+        "criticalStrike":22,
+        "immagine":"",
+        "data":""
+    },
+    "Giocatore10": {
+      "uid":10,
+      "nome": "xXx Machine nd",
+      "titoli": [
+        "Ufc Welter 16 position",
+        "K1 Wtf",
+        "Wdba 11 position"],
+        "hype":[25],
+        "forza":8,
+        "destrezza":30,
+        "stamina":20,
+        "striking":10,
+        "groundgame":7,
+        "salute":50,
+        "money":10,
+        "punteggio":0,
+        "criticalStrike":12,
         "immagine":"",
         "data":""
     }

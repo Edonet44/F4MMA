@@ -32,11 +32,12 @@ class _MatchScreenState extends State<MatchScreen> {
       });
     }
   }
+//
 
   //funzione che richiama la creazione dei match
   Tomatch() {
     try {
-      //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json ù
+      //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json
       //aggiungo alla lista tutti i dati di ogni singolo giocatore
       List<Giocatore> giocatori = [];
       for (var atleta in player!) {
@@ -45,6 +46,11 @@ class _MatchScreenState extends State<MatchScreen> {
         giocatori.add(atleta.giocatore3);
         giocatori.add(atleta.giocatore4);
         giocatori.add(atleta.giocatore5);
+        giocatori.add(atleta.giocatore6);
+        giocatori.add(atleta.giocatore7);
+        giocatori.add(atleta.giocatore8);
+        giocatori.add(atleta.giocatore9);
+        giocatori.add(atleta.giocatore10);
       }
 
       //istanza e richiamo funzione creamatch in classe cl_incontri con passaggio di variabile di tipo lista giocatore

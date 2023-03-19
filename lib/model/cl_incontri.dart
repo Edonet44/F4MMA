@@ -29,134 +29,248 @@ class Incontri {
     throw (e);
   }
 
-//2   Version con giocatore
-  //crea i match
+// 1 Iterazione sulla lista di giocatori: viene utilizzata una doppia iterazione su tutti i giocatori della lista, in modo che ogni giocatore venga confrontato con ogni altro giocatore della lista.
+
+// 2 Calcolo della probabilità di vittoria per ogni giocatore: viene chiamata la funzione "calculateWinningChance" per calcolare la probabilità di vittoria di ciascun giocatore rispetto all'altro.
+
+// 3 Simulazione dello scontro tra i giocatori: viene chiamata la funzione "simulateBattle" per generare una simulazione di scontro tra i due giocatori, utilizzando la probabilità di vittoria calcolata in precedenza per determinare il vincitore.
+
+// 4 Definizione della funzione "simulateBattle": la funzione prende in input due oggetti "Giocatri" e le rispettive probabilità di vittoria, e genera un numero casuale per determinare il vincitore dello scontro. Viene quindi stampato il risultato dello scontro sulla console.
+
+// 5 Definizione della funzione "calculateWinningChance": la funzione prende in input due oggetti "Giocatori" e calcola la probabilità di vittoria di ciascun giocatore rispetto all'altro, sulla base della somma delle loro statistiche di gioco. Viene inoltre aggiunto un po' di casualità alla probabilità di vittoria, per rendere il gioco più interessante.
+
+// 6 Definizione della funzione "addRandomness": la funzione prende in input una probabilità e ne aumenta la casualità, restituendo una nuova probabilità con un valore casuale aggiunto. Questa funzione viene utilizzata all'interno della funzione "calculateWinningChance".
+
   void Creamatches(List<Giocatore>? giocatori) {
-    // var punteggio = 0;
     try {
-      //mescolo come con delle carte i vari giocatori
-      giocatori!.shuffle();
-      //istanzio la classe giocatore con un array bidimensionale vuoto
-      final List<List<Giocatore>> matches = [];
-      //final AtletiManager atleti;
-      //itero per la lunghezza dei giocatori
-      for (var i = 0; i < giocatori.length; i++) {
-        //creo una lista per i round
-        final List<Giocatore> roundMatches = [];
-        //aggiungo alla lista tutti i giocatori
-        roundMatches.add(giocatori[i]);
+      List<Giocatore> classifica =
+          []; // nuova lista per memorizzare tutti i giocatori e i loro punteggi
+      // Itera su tutti i giocatori e confrontali con gli altri giocatori
+      for (var i = 0; i < giocatori!.length - 1; i++) {
+        print('Round ${i + 1}');
+        Giocatore giocatore1 = giocatori[i];
+        bool hasMatched = false; // indica se il giocatore1 ha già combattuto
+
         for (var j = i + 1; j < giocatori.length; j++) {
-          roundMatches.add(giocatori[j]);
-        }
-        matches.add(roundMatches);
-        //gioca i match
-        for (var i = 0; i < matches.length; i++) {
-          print('Round ${i + 1}');
-          for (final match in matches[i]) {
-            /* final random = Random();
-            final result = random.nextInt(2); */
-            //  Algorithm_prob_math().Add_Players(matches);
-            // if (result == 0) {
-            //   match.punteggio++;
-            //   print('${match.nome} vittoria!');
-            // } else {
-            //   print('${match.nome} sconfitta!');
-            // }
+          if (hasMatched) {
+            // se il giocatore1 ha già combattuto, salta i confronti successivi
+            break;
           }
-          //ordina per punteggio
-          matches[i].sort((a, b) => b.punteggio.compareTo(a.punteggio));
-          //stampa per punteggio
-          print('punteggio');
-          for (final match in matches[i]) {
-            print('${match.nome}${match.punteggio}');
+          Giocatore giocatore2 = giocatori[j];
+          // Calcola la probabilità di vittoria per ciascun giocatore
+          double player1Chance = calculateWinningChance(giocatore1, giocatore2);
+          double player2Chance = 1 - player1Chance;
+
+          //decide in modo casuale il numero di round per ogni incontro
+          Random rand = Random();
+          int numRounds = rand.nextDouble() < 0.5 ? 3 : 5;
+
+          // Simula tre round per ogni incontro
+          int player1Wins = 0;
+          int player2Wins = 0;
+
+          for (var k = 0; k < numRounds; k++) {
+            double roundPlayer1Chance =
+                calculateRoundWinningChance(player1Chance);
+            double roundPlayer2Chance = 1 - roundPlayer1Chance;
+            int roundWinner = simulateRound(
+                giocatore1, giocatore2, roundPlayer1Chance, roundPlayer2Chance);
+            if (roundWinner == 1) {
+              player1Wins++;
+            } else {
+              player2Wins++;
+            }
           }
+          // Determina il vincitore dell'incontro
+          // Determine the winner of the match
+          if (player1Wins > player2Wins) {
+            print(
+                '${giocatore1.nome} ha vinto la partita contro ${giocatore2.nome} (${player1Wins}-${player2Wins})');
+            giocatore1.punteggio += 3;
+          } else if (player2Wins > player1Wins) {
+            print(
+                '${giocatore2.nome} ha vinto la partita contro ${giocatore1.nome} (${player2Wins}-${player1Wins})');
+            giocatore2.punteggio += 3;
+          } else {
+            print(
+                'La partita tra ${giocatore1.nome} e ${giocatore2.nome} è finita in pareggio (${player1Wins}-${player2Wins})');
+            giocatore1.punteggio += 1;
+            giocatore2.punteggio += 1;
+          }
+          // Aggiungi i giocatori e i loro punteggi alla nuova lista
+          classifica.add(giocatore1);
+          classifica.add(giocatore2);
+          // Genera una simulazione di scontro tra i giocatori
+          // simulateBattle(giocatore1, giocatore2, player1Chance, player2Chance);
+
+          // Rimuove il giocatore che ha appena combattuto dalla lista dei giocatori
+          hasMatched = true; // segna il giocatore1 come "già combattuto"
+          giocatori.remove(giocatore2);
+          j--;
         }
       }
+      // Ordina i giocatori per punteggio della seconda lista
+      classifica.sort((a, b) => b.punteggio.compareTo(a.punteggio));
+      //chiama funzione di stampa classifica
+      Stmp_classifica(classifica);
     } catch (e) {
       print(e);
     }
   }
-}
 
-//testing per recupero dati da file json
-//recupera i valori del file json
-// final String jstring = Match().loadJson().toString();
-// //istanza della classe atleta
-// final AtletiManager atleta = AtletiManager.fromJson(jstring);
-// try {
-//   //stampa il file
-//   print(atleta.nome);
-//   for (final titoli in atleta.titoli) {
-//     print(titoli.titolo);
-//   }
-// } on Exception catch (e) {
-//   print('Errore: $e');
-// }
+//calcolo probabilità per punteggio a 3 o 5 round
+  double calculateRoundWinningChance(double player1Chance) {
+    // Aggiungi un po' di casualità per rendere il gioco più interessante
+    double minRandomness = 0.05;
+    double maxRandomness = 0.2;
+    Random rand = Random();
+    double randomness =
+        minRandomness + (maxRandomness - minRandomness) * rand.nextDouble();
+    double roundPlayer1Chance =
+        player1Chance + (randomness * (rand.nextBool() ? 1 : -1));
+    double roundPlayer2Chance = 1 - roundPlayer1Chance;
+    return roundPlayer1Chance;
+  }
 
-//3
-///classe con algoritmo di probabilità che confronta due giocatori in base a dei valori passati
+  int simulateRound(Giocatore player1, Giocatore player2,
+      double roundPlayer1Chance, double roundPlayer2Chance) {
+    // Genera tre numeri casuali per determinare il vincitore di ogni round
+    Random rand = Random();
+    int player1Wins = 0;
+    int player2Wins = 0;
 
-class Algorithm_prob_math {
-  /*  String name;
-  int strength;
-  int defense;
-  int magic; */
+    for (var i = 0; i < 3; i++) {
+      double randNum = rand.nextDouble();
+      if (randNum < roundPlayer1Chance) {
+        player1Wins++;
+      } else {
+        player2Wins++;
+      }
+    }
 
-  /* Algorithm_prob_math(
-      super.uid,
-      super.nome,
-      super.titoli,
-      super.friends,
-      super.forza,
-      super.destrezza,
-      super.stamina,
-      super.striking,
-      super.groundgame,
-      super.criticalstrike,
-      super.salute,
-      super.money,
-      super.punteggio,
-      super.data,
-      super.immagine);
- */
-  //Player(this.name, this.strength, this.defense, this.magic);
+    // Determina il vincitore del round
+    if (player1Wins > player2Wins) {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
 
-  Map<String, dynamic> test_giocatore = {};
+//funzione per stabilire la classifica fra giocatori
+  void Stmp_classifica(List<Giocatore> classifica) {
+    // Visualizza la classifica finale
+    for (var i = 0; i < classifica.length; i++) {
+      print(
+          '${i + 1}. ${classifica[i].nome} (${classifica[i].punteggio} punti)');
+    }
+  }
 
-  //per far si che il metodo funzioni bisogna implementare il tipo iterable nella classe json cl_api_player
+// da gestire in un secondo momento il valore dell hype!
+  double calculateWinningChance(player1, player2) {
+    double p1Strength = player1.forza.toDouble() +
+        player1.destrezza.toDouble() +
+        player1.striking.toDouble() +
+        player1.stamina.toDouble() +
+        player1.groundgame.toDouble() +
+        player1.salute.toDouble() +
+        player1.criticalStrike.toDouble();
+    double p2Strength = player2.forza.toDouble() +
+        player2.destrezza.toDouble() +
+        player2.striking.toDouble() +
+        player2.stamina.toDouble() +
+        player2.groundgame.toDouble() +
+        player2.salute.toDouble() +
+        player2.criticalStrike.toDouble();
 
-  // Add_Players(List<List<Giocatore>> matches) {
-  //   try {
-  //     // List<Algorithm_prob_math> players = [];
-  //     for (var i = 0; i < matches.length; i++) {
-  //       for (var round in matches[i]) {
-  //         for (var giocatore in round) {
-  //           test_giocatore[giocatore.nome] = giocatore;
-  //         }
-  //       }
-  //     }
-  //   } catch (e) {
-  //     print(e);
+    double p1Prob = p1Strength / (p1Strength + p2Strength);
+    double p2Prob = 1 - p1Prob;
+
+    // add some randomness to make the game more interesting
+    p1Prob = addRandomness(p1Prob);
+    p2Prob = 1 - p1Prob;
+
+    return p1Prob;
+  }
+
+  double addRandomness(double prob) {
+    Random rand = Random();
+    double minRandomness = 0.05;
+    double maxRandomness = 0.2;
+    double randomness =
+        minRandomness + (maxRandomness - minRandomness) * rand.nextDouble();
+    return prob + (randomness * (rand.nextBool() ? 1 : -1));
+  }
+
+  // void simulateBattle(Giocatore player1, Giocatore player2,
+  //     double player1Chance, double player2Chance) {
+  //   // Genera un numero casuale per determinare il vincitore del scontro
+  //   Random rand = Random();
+  //   double randomNumber = rand.nextDouble();
+
+  //   if (randomNumber < player1Chance) {
+  //     print(
+  //         '${player1.nome} ha sconfitto ${player2.nome} con una probabilità del ${player1Chance * 100}%!');
+  //   } else {
+  //     print(
+  //         '${player2.nome} ha sconfitto ${player1.nome} con una probabilità del ${player2Chance * 100}%!');
   //   }
   // }
 }
 
-void main() {
-//  Player player1 = Player('Mario', 10, 5, 5);
-//   Player player2 = Player('Luigi', 8, 7, 4);
 
-// //qui deve essere passata la lista dei giocatori passati
-//   double player1Chance = calculateWinningChance(player1, player2);
-//   double player2Chance = 1 - player1Chance;
+//classe che simula scontro
+ 
 
-//   print('${player1.name} has a ${player1Chance * 100}% chance of winning.');
-//   print('${player2.name} has a ${player2Chance * 100}% chance of winning.');
+// class Player {
+//  final String nome;
+//   final int magic;
+//   final int dextery;
+//   final int power;
+
+//   Player({required this.nome,required this.magic,required this.dextery,required this.power});
+// }
+// void main(){
+  
+// // Crea una lista di giocatori
+//   List<Player> players = [
+//     Player(nome: 'Mario', magic: 20, dextery: 50, power: 50),
+//     Player(nome: 'Luigi', magic: 8, dextery: 7, power: 4),
+//     Player(nome: 'Principessa Peach', magic: 9, dextery: 6, power: 6),
+//     // Aggiungi altri giocatori qui
+//   ];
+
+//   // Itera su tutti i giocatori e confrontali con gli altri giocatori
+//   for (int i = 0; i < players.length; i++) {
+//     Player player1 = players[i];
+
+//     for (int j = i + 1; j < players.length; j++) {
+//       Player player2 = players[j];
+
+//       // Calcola la probabilità di vittoria per ciascun giocatore
+//       double player1Chance = calculateWinningChance(player1, player2);
+//       double player2Chance = 1 - player1Chance;
+
+//       // Genera una simulazione di scontro tra i giocatori
+//       simulateBattle(player1, player2, player1Chance, player2Chance);
+//     }
+//   }
 // }
 
-// //funzione che ritorna
-// double calculateWinningChance(List ) {
-//   double p1Strength = player1.strength.toDouble();
-//   double p2Strength = player2.strength.toDouble();
+// void simulateBattle(Player player1, Player player2, double player1Chance, double player2Chance) {
+//   // Genera un numero casuale per determinare il vincitore del scontro
+//   Random rand = Random();
+//   double randomNumber = rand.nextDouble();
+
+//   if (randomNumber < player1Chance) {
+//     print('${player1.nome} ha sconfitto ${player2.nome} con una probabilità del ${player1Chance * 100}%!');
+//   } else {
+//     print('${player2.nome} ha sconfitto ${player1.nome} con una probabilità del ${player2Chance * 100}%!');
+//   }
+// }
+
+// double calculateWinningChance(player1,player2) {
+// double p1Strength = player1.magic.toDouble() + player1.dextery.toDouble() + player1.power.toDouble();
+// double p2Strength = player2.magic.toDouble() + player2.dextery.toDouble() + player2.power.toDouble();
 
 //   double p1Prob = p1Strength / (p1Strength + p2Strength);
 //   double p2Prob = 1 - p1Prob;
@@ -167,13 +281,18 @@ void main() {
 
 //   return p1Prob;
 // }
-
 // double addRandomness(double prob) {
-//   Random rand = Random();
-//   double minRandomness = 0.05;
+//    Random rand = Random();
+//    double minRandomness = 0.05;
 //   double maxRandomness = 0.2;
 //   double randomness =
 //       minRandomness + (maxRandomness - minRandomness) * rand.nextDouble();
 //   return prob + (randomness * (rand.nextBool() ? 1 : -1));
-// }
-}
+//  }
+
+
+
+
+
+
+

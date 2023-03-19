@@ -4,6 +4,8 @@ import '../widget/bottom_nav_bar.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'atleta_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -125,7 +127,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      Text("Scegli un tuo Atleta ed inizia a combattere!"),
+                      Text(
+                          "Clicca sulla foto un tuo Atleta inizia a combattere!"),
                     ],
                   )
                 ]))
@@ -274,11 +277,21 @@ class _CarouselState extends State<Carousel> {
     return images
         .map((element) => (ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: Image.asset(
-                element,
-                fit: BoxFit.cover,
-                width: 300,
-                height: 200,
+              child: GestureDetector(
+                onTap: () {
+                  //passo l'immagine cliccata alla pagina atleta_screen
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const atleta_screen(),
+                          settings: RouteSettings(arguments: element)));
+                },
+                child: Image.asset(
+                  element,
+                  fit: BoxFit.cover,
+                  width: 300,
+                  height: 200,
+                ),
               ),
             )))
         .toList();

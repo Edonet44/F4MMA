@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:f4mma/model/cl_api_player.dart';
 import 'package:f4mma/model/cl_incontri.dart';
 import 'package:flutter/material.dart';
+import '../backend/api.dart';
 import '../widget/bottom_nav_bar.dart';
 
 class MatchScreen extends StatefulWidget {
@@ -12,7 +15,10 @@ class MatchScreen extends StatefulWidget {
   State<MatchScreen> createState() => _MatchScreenState();
 }
 
-class _MatchScreenState extends State<MatchScreen> {
+class _MatchScreenState extends State<MatchScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _rotationAnimation;
   //lista di player
   List<Player>? player;
   var isLoaded = false;
@@ -20,12 +26,30 @@ class _MatchScreenState extends State<MatchScreen> {
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+    _rotationAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+    _animationController.repeat();
     getdata();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
 //recupero json e passo alla lista di tipo player
   getdata() async {
-    player = await Incontri().loadJson();
+    player = await Api().loadJson();
     if (player != null) {
       setState(() {
         isLoaded = true;
@@ -75,14 +99,60 @@ class _MatchScreenState extends State<MatchScreen> {
             Row(
               //inserire oggetto di profilo
               children: <Widget>[
-                ElevatedButton(
-                    onPressed: () {
-                      Tomatch();
-                    },
-                    child: Text("Combatti")),
+                animation_ufcoctagon(rotationAnimation: _rotationAnimation),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 30),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Tomatch();
+                      },
+                      child: Text("Combatti")),
+                )
               ],
             )
           ],
         )));
+  }
+}
+
+class animation_ufcoctagon extends StatelessWidget {
+  const animation_ufcoctagon({
+    super.key,
+    required Animation<double> rotationAnimation,
+  }) : _rotationAnimation = rotationAnimation;
+
+  final Animation<double> _rotationAnimation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          /*   boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ], */
+          ),
+      child: Padding(
+        padding: EdgeInsets.only(left: 20, top: 10, right: 10, bottom: 10),
+        child: AnimatedBuilder(
+          animation: _rotationAnimation,
+          builder: (context, child) {
+            return Transform(
+              transform: Matrix4.rotationY(_rotationAnimation.value * 2.0 * pi),
+              alignment: Alignment.center,
+              child: Image.asset('assets/images/octagon.png', width: 200),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

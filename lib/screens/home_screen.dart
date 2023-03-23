@@ -1,4 +1,7 @@
+import 'package:f4mma/backend/api.dart';
+import 'package:f4mma/model/cl_atleta.dart';
 import 'package:flutter/material.dart';
+import '../model/cl_api_player.dart';
 import '../theme/theme.dart';
 import '../widget/bottom_nav_bar.dart';
 import 'package:shimmer/shimmer.dart';
@@ -6,10 +9,53 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'atleta_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static const routeName = '/';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+//   //lista di player
+//   List<Player>? player;
+//   List<Giocatore> giocatori = [];
+//   var isLoaded = false;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     getdata();
+//   }
+
+// //recupero json e passo dati alla lista di tipo player
+//   getdata() async {
+//     try {
+//       player = await Api().loadJson();
+//       if (player != null) {
+//         setState(() {
+//           isLoaded = true;
+//         });
+//       }
+//       //inserisco i valori nella lista giocatori
+//       for (var atleta in player!) {
+//         giocatori.add(atleta.giocatore1);
+//         giocatori.add(atleta.giocatore2);
+//         giocatori.add(atleta.giocatore3);
+//         giocatori.add(atleta.giocatore4);
+//         giocatori.add(atleta.giocatore5);
+//         giocatori.add(atleta.giocatore6);
+//         giocatori.add(atleta.giocatore7);
+//         giocatori.add(atleta.giocatore8);
+//         giocatori.add(atleta.giocatore9);
+//         giocatori.add(atleta.giocatore10);
+//       }
+//     } catch (e) {
+//       print(e);
+//     }
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +102,9 @@ class HomeScreen extends StatelessWidget {
             //inserire oggetto
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(left: 15, top: 10),
+                padding: const EdgeInsets.only(left: 20, top: 10),
                 child: Image.asset(
-                  "assets/images/separatoreandlogo.png",
+                  "assets/images/separatore.png",
                   width: 330,
                 ),
               )
@@ -85,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
                             fit: BoxFit.fill,
-                            "assets/images/profilo.png",
+                            "assets/images/gallo/malley.png",
                             width: 150,
                             height: 200,
                           ))
@@ -98,11 +144,11 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        "assets/images/prenotazione_app/logo_tao.png",
-                        width: 80,
-                        height: 80,
-                      ),
+                      // Image.asset(
+                      //   "assets/images/Ufc_logo.png",
+                      //   width: 80,
+                      //   height: 80,
+                      // ),
                     ],
                   ),
                   const SizedBox(
@@ -113,24 +159,22 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Padding(padding: EdgeInsets.only(left: 5)),
+                      // const Padding(padding: EdgeInsets.only(left: 10)),
                       RichText(
                         text: TextSpan(
                           text: 'Benvenuto',
-                          style: DefaultTextStyle.of(context).style,
+                          style: IntestazioneTitolo,
                           children: const <TextSpan>[
                             TextSpan(
-                                text: 'bold',
+                                text: '',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(text: ' in F4mma!'),
+                            TextSpan(text: '\n in F4mma!'),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                          "Clicca sulla foto un tuo Atleta inizia a combattere!"),
+                      const SizedBox(height: 10),
                     ],
-                  )
+                  ),
                 ]))
               ],
             ),
@@ -140,10 +184,10 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.only(left: 15, top: 10),
-                  child: Image.asset(
-                    "assets/images/prenotazione_app/separatoreandlogo.png",
-                    width: 330,
-                  ),
+                  // child: Image.asset(
+                  //   "assets/images/pngegg.png",
+                  //   width: 330,
+                  // ),
                 )
               ],
             ),
@@ -258,23 +302,28 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   int _current = 0;
-  final List<String> images = [
-    'assets/images/gallo/cory.png',
-    'assets/images/gallo/cruz.png',
-    'assets/images/gallo/davil.png',
-    'assets/images/gallo/font.png',
-    'assets/images/gallo/malley.png',
-    'assets/images/gallo/muhnoz.png',
-    'assets/images/gallo/song.png',
-    'assets/images/gallo/sterling.png',
-    'assets/images/gallo/umar.png',
-    'assets/images/gallo/vera.png',
-    'assets/images/gallo/yan.png',
+
+  final List<AtletiUFC> atletiUfc = [
+    AtletiUFC(1, 'erter', 'rte', 'assets/images/gallo/cory.png', 24),
+    AtletiUFC(2, 'gsd', 'dfgdf', 'assets/images/gallo/cruz.png', 25),
+    AtletiUFC(3, 'daer', 'ere', 'assets/images/gallo/davil.png', 27),
+    AtletiUFC(4, 'erte', 'er', 'assets/images/gallo/font.png', 27),
+    AtletiUFC(
+        5,
+        'Malley',
+        'O\'Malley si allena a Glendale presso la The MMA Lab diretto dal capo allenatore John Crouch Ha combattuto i suoi primi cinque combattimenti della sua carriera in Montana per poi spostarsi nel Nord Dakota per combattere poi per la Legacy Fighting Alliance dove riesce ad ottenere un\'incredibile vittoria per KO con uno spinning hook kick su David Nuzzo Dopo questa vittoria si guadagna un posto per il Dana White\'s Tuesday Night Contender Series sfidando Alfred Khashakyan O\'Malley con un\'altra sorprendente prestazione lo batte per KO al primo round Dopo questa vittoria ottiene un contratto con la UFC',
+        'assets/images/gallo/malley.png',
+        24),
+    AtletiUFC(6, '', '', 'assets/images/gallo/muhnoz.png', 23),
+    AtletiUFC(7, '', '', 'assets/images/gallo/sterling.png', 28),
+    AtletiUFC(8, '', '', 'assets/images/gallo/umar.png', 26),
+    AtletiUFC(9, '', '', 'assets/images/gallo/vera.png', 30),
+    AtletiUFC(10, '', '', 'assets/images/gallo/yan.png', 31)
   ];
 
   List<Widget> generateImageTiles() {
     //la lista immagini crea una mappa che a sua volta ritorna un insieme di immagini dentro l oggetto ClipRRect
-    return images
+    return atletiUfc
         .map((element) => (ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: GestureDetector(
@@ -287,10 +336,10 @@ class _CarouselState extends State<Carousel> {
                           settings: RouteSettings(arguments: element)));
                 },
                 child: Image.asset(
-                  element,
+                  element.img,
                   fit: BoxFit.cover,
                   width: 300,
-                  height: 200,
+                  height: 300,
                 ),
               ),
             )))

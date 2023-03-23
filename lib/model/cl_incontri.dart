@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:async' show Future;
+import 'package:f4mma/backend/api.dart';
 import 'package:f4mma/model/cl_titoli.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:f4mma/model/cl_atleta.dart';
@@ -17,18 +18,18 @@ class Incontri {
   /// 2 creare i match
   /// 3 creare il metodo di confronto  //nb mettere la classe api iterable, ripassare gli iterable
 
-//1
+//1 inserita in backend
 //creo una funzione per il recupero del file .json
-  Future<List<Player>?> loadJson() async {
-    try {
-      final jsonString =
-          await rootBundle.loadString('assets/api/players_config.json');
-      return playerFromJson(jsonString);
-    } catch (e) {
-      print(e);
-    }
-    throw (e);
-  }
+  // Future<List<Player>?> loadJson() async {
+  //   try {
+  //     final jsonString =
+  //         await rootBundle.loadString('assets/api/players_config.json');
+  //     return playerFromJson(jsonString);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   throw (e);
+  // }
 
 //funzione che scrive il valore passato al file json
   Future<void> writeToJson(List<Giocatore> giocatore) async {
@@ -160,8 +161,9 @@ class Incontri {
       //chiama funzione di stampa classifica
       Stmp_classifica(classifica);
       //dopo aver stampato aggiorna i valori del punteggio nel file json
-      //aggiorna il file json con i punteggi nuovi
-      writeToJson(classifica);
+      //
+      //QUI CI SARA L'AGGIORNAMENTO DEL FILE UBICATO NELLO STORAGE DI FIREBASE
+      // Api().writeToJson(classifica);
     } catch (e) {
       print(e);
     }

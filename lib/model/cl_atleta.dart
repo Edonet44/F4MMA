@@ -19,13 +19,13 @@ class Atleti {
   String get nome => _nome;
   set name(String nome) => _nome = nome;
 
-//recupero dati json
-  factory Atleti.fromJson(Map<String, dynamic> json) {
-    return Atleti(
-      json['uid'],
-      json["nome"],
-    );
-  }
+// //recupero dati json
+//   factory Atleti.fromJson(Map<String, dynamic> json) {
+//     return Atleti(
+//       json['uid'],
+//       json["nome"],
+//     );
+//   }
 //crea atleta
   void createPerson(List<Atleti> atleti) {
     atleti.add(this);
@@ -44,9 +44,9 @@ class Atleti {
     atleti.removeWhere((atleta) => atleta.nome == this._nome);
   }
 
-/* //metodo utile se voglio cambiare un valore interno alla classe senza utilizzare nuovamente un costruttore
-  Atleti copywith({String nome,String titoli,int hype,Int forza, int destrezza, int stamina, int striking, int groundgame,int criticalstrike,Image immagine, DateTime data});
- */
+// /* //metodo utile se voglio cambiare un valore interno alla classe senza utilizzare nuovamente un costruttore
+//   Atleti copywith({String nome,String titoli,int hype,Int forza, int destrezza, int stamina, int striking, int groundgame,int criticalstrike,Image immagine, DateTime data});
+//  */
 
 //metodo che ritorna il valore stringa dell oggetto
   @override
@@ -74,42 +74,46 @@ class Atleti {
   
   */
   //per scrivere nel json
-  Map<String, dynamic> toJson() => {'uid': uid, 'nome': nome};
+  // Map<String, dynamic> toJson() => {'uid': uid, 'nome': nome};
 }
 
-class AtletiManager extends Atleti {
-  final List<Titoli> titoli;
-  final List<FriendsFan> friends;
-  final int forza;
-  final int destrezza;
-  final int stamina;
-  final int striking;
-  final int groundgame;
-  final int criticalstrike;
-  final int salute;
-  final int money;
-  int punteggio;
-  final String data;
-  final String immagine;
+class AtletiUFC extends Atleti {
+  final String bio;
+  final String img;
+  final int eta;
+  // final List<Titoli> titoli;
+  // final List<FriendsFan> friends;
+  // final int forza;
+  // final int destrezza;
+  // final int stamina;
+  // final int striking;
+  // final int groundgame;
+  // final int criticalstrike;
+  // final int salute;
+  // final int money;
+  // int punteggio;
+  // final String data;
+  // final String immagine;
   List<Atleti> atletiList = [];
 
-  AtletiManager(
-    int uid,
-    String nome,
-    this.titoli,
-    this.friends,
-    this.forza,
-    this.destrezza,
-    this.stamina,
-    this.striking,
-    this.groundgame,
-    this.criticalstrike,
-    this.salute,
-    this.money,
-    this.punteggio,
-    this.data,
-    this.immagine,
-  ) : super(uid, nome);
+  AtletiUFC(int uid, String nome, this.bio, this.img, this.eta
+      // int uid,
+      // String nome,
+      // this.titoli,
+      // this.friends,
+      // this.forza,
+      // this.destrezza,
+      // this.stamina,
+      // this.striking,
+      // this.groundgame,
+      // this.criticalstrike,
+      // this.salute,
+      // this.money,
+      // this.punteggio,
+      // this.data,
+      // this.immagine,
+      )
+      : super(uid, nome);
 
 //aggiunge un atleta
   void addAtleta(List<Atleti> newUser) {
@@ -132,86 +136,90 @@ class AtletiManager extends Atleti {
     atletiList.removeAt(index);
   }
 
-  void stampaAtleta() {
-    print(
-        'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Immagine:$immagine Data: $data');
+  @override
+  String toString() {
+    return 'Id: $uid , Nome: $nome ,Eta: $eta , Bio: $bio , Immagine: $img ';
   }
+  // void stampaAtleta() {
+  //   print(
+  //       'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Immagine:$immagine Data: $data');
+  // }
 
   ///[deprecated]
   ///funzione gia in utlizzo nella classe cl_api_player.dart
 //get atleta fromJson
-  factory AtletiManager.fromJson(String jsonString) {
-    try {
-      //associa alla variabile dinamica il decode della stringa passata
-      final jsonMap = json.decode(jsonString);
-      // creo una lista con valore nullo della classe friendsfan
-      final List<FriendsFan> friends = [];
-      final List<Titoli> titoli = [];
+  // factory AtletiManager.fromJson(String jsonString) {
+  //   try {
+  //     //associa alla variabile dinamica il decode della stringa passata
+  //     final jsonMap = json.decode(jsonString);
+  //     // creo una lista con valore nullo della classe friendsfan
+  //     final List<FriendsFan> friends = [];
+  //     final List<Titoli> titoli = [];
 
-      //se hype e' diverso da nullo
-      if (jsonMap['hype'] != null) {
-        for (final hype in jsonMap['hype']) {
-          //aggiunge alla variabile di tipo Friendsfan il risultato dei valori di hype
-          final FriendsFan friendsFan = FriendsFan.fromJson(hype);
-          //adesso si puo aggiungere all array i valori e popolare la lista Friends
-          friends.add(friendsFan);
-        }
-      }
-      //si ripete la stessa cosa per la lista titoli
-      if (jsonMap['titoli'] != null) {
-        for (final titoli in jsonMap['titoli']) {
-          final Titoli titles = Titoli.fromJson(titoli);
-          titoli.add(titles);
-        }
-      }
+  //     //se hype e' diverso da nullo
+  //     if (jsonMap['hype'] != null) {
+  //       for (final hype in jsonMap['hype']) {
+  //         //aggiunge alla variabile di tipo Friendsfan il risultato dei valori di hype
+  //         final FriendsFan friendsFan = FriendsFan.fromJson(hype);
+  //         //adesso si puo aggiungere all array i valori e popolare la lista Friends
+  //         friends.add(friendsFan);
+  //       }
+  //     }
+  //     //si ripete la stessa cosa per la lista titoli
+  //     if (jsonMap['titoli'] != null) {
+  //       for (final titoli in jsonMap['titoli']) {
+  //         final Titoli titles = Titoli.fromJson(titoli);
+  //         titoli.add(titles);
+  //       }
+  //     }
 
-      return AtletiManager(
-          jsonMap["uid"] ?? 0,
-          jsonMap["nome"] ?? "vuoto",
-          titoli,
-          friends,
-          jsonMap["forza"] ?? 0,
-          jsonMap["destrezza"] ?? 0,
-          jsonMap["stamina"] ?? 0,
-          jsonMap["striking"] ?? 0,
-          jsonMap["groundgame"] ?? 0,
-          jsonMap["criticalstrike"] ?? 0,
-          jsonMap["salute"] ?? 0,
-          jsonMap["money"] ?? 0,
-          jsonMap["punteggio"] ?? 0,
-          jsonMap["data"] ?? "vuoto",
-          jsonMap["immagine"] ?? "vuoto");
-    } on FormatException {
-      throw Exception("C'e un errore nella codifica del file Json");
-    } catch (e) {
-      throw Exception("Errore generico $e");
-    }
-  }
+  //     return AtletiManager(
+  //         jsonMap["uid"] ?? 0,
+  //         jsonMap["nome"] ?? "vuoto",
+  //         titoli,
+  //         friends,
+  //         jsonMap["forza"] ?? 0,
+  //         jsonMap["destrezza"] ?? 0,
+  //         jsonMap["stamina"] ?? 0,
+  //         jsonMap["striking"] ?? 0,
+  //         jsonMap["groundgame"] ?? 0,
+  //         jsonMap["criticalstrike"] ?? 0,
+  //         jsonMap["salute"] ?? 0,
+  //         jsonMap["money"] ?? 0,
+  //         jsonMap["punteggio"] ?? 0,
+  //         jsonMap["data"] ?? "vuoto",
+  //         jsonMap["immagine"] ?? "vuoto");
+  //   } on FormatException {
+  //     throw Exception("C'e un errore nella codifica del file Json");
+  //   } catch (e) {
+  //     throw Exception("Errore generico $e");
+  //   }
+  // }
 
-  //
-  //Crea atleta per convertire Atleta toJson
-  Map<String, dynamic> toJson() => {
-        'uid': uid,
-        'nome': nome,
-        'Titoli': titoli,
-        'Hype': friends,
-        'Forza': forza,
-        'Destrezza': destrezza,
-        'Stamina': stamina,
-        'Striking': striking,
-        'GroundGame': groundgame,
-        'CriticalStrike': criticalstrike,
-        'Salute': salute,
-        'Borsa': money,
-        'Punteggio': punteggio,
-        'Immagine': immagine,
-        'Data': data
-      };
+  // //
+  // //Crea atleta per convertire Atleta toJson
+  // Map<String, dynamic> toJson() => {
+  //       'uid': uid,
+  //       'nome': nome,
+  //       'Titoli': titoli,
+  //       'Hype': friends,
+  //       'Forza': forza,
+  //       'Destrezza': destrezza,
+  //       'Stamina': stamina,
+  //       'Striking': striking,
+  //       'GroundGame': groundgame,
+  //       'CriticalStrike': criticalstrike,
+  //       'Salute': salute,
+  //       'Borsa': money,
+  //       'Punteggio': punteggio,
+  //       'Immagine': immagine,
+  //       'Data': data
+  //     };
 
-  @override
-  String toString() {
-    return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Striking:$striking,Groundgame:$groundgame,Salute:$salute,:$money,Punteggio:$punteggio,$immagine Data: $data';
-  }
+  // @override
+  // String toString() {
+  //   return 'Titoli: $titoli, Hype: $friends,Forza:$forza,Destrezza:$destrezza,Stamina:$stamina,Striking:$striking,Groundgame:$groundgame,Salute:$salute,:$money,Punteggio:$punteggio,$immagine Data: $data';
+  // }
 }
 
 void main() {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052862712934",
+    "project_id": "f4mma-bce65",
+    "storage_bucket": "f4mma-bce65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052862712934:android:1195387d6b3f090c9931a7",
+        "android_client_info": {
+          "package_name": "com.example.f4mma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052862712934-2ksh2571i2umfl66gljsakv1c11nl985.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiGd6F-88fzOrvMpdljOlrdBDW5RE7Yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052862712934-2ksh2571i2umfl66gljsakv1c11nl985.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

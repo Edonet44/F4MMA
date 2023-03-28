@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
 import '../widget/choicebutton.dart';
+import 'match_screen.dart';
 
 // ignore: camel_case_types
 class atleta_screen extends StatefulWidget {
@@ -114,6 +115,13 @@ class _atleta_screenState extends State<atleta_screen>
                     child: ElevatedButton(
                         onPressed: () {
                           //funzione che richiama il bloc...
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MatchScreen(),
+                                  settings: RouteSettings(
+                                      arguments: items[4] + ',' + items[1])));
                         },
                         child: Text("Inizia")),
                   )

@@ -93,6 +93,11 @@ class _MatchScreenState extends State<MatchScreen>
 
   @override
   Widget build(BuildContext context) {
+    //recupero immagine atleta
+    final String atelta_for_match =
+        ModalRoute.of(context)!.settings.arguments.toString();
+    List<String> items = [];
+    atelta_for_match.split(',').forEach((item) => items.add(item.trim()));
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -108,6 +113,8 @@ class _MatchScreenState extends State<MatchScreen>
               color: Colors.black38,
             ),
             AppText(text: 'Scegli palestra', color: Colors.black87),
+            Divider(),
+            clip_oval(items[0], items[1], 80, 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
@@ -163,6 +170,42 @@ class _MatchScreenState extends State<MatchScreen>
           ],
         )));
   }
+}
+
+//funzione iniziale con clipoval e container
+clip_oval(String img, String nome, double larghezza, double altezza) {
+  return Row(
+    children: [
+      Expanded(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey, width: 2.0)),
+              child: ClipOval(
+                  child: Image.asset(
+                img,
+                width: larghezza,
+                height: altezza,
+                alignment: Alignment.topCenter,
+                fit: BoxFit.cover,
+              )),
+            )
+          ],
+        ),
+      ),
+      Expanded(
+        child: Column(
+          children: [
+            Container(
+              child: Text("Mr :$nome"),
+            )
+          ],
+        ),
+      )
+    ],
+  );
 }
 
 //classe mappa
@@ -316,7 +359,7 @@ class animation_allenamento extends StatelessWidget {
             return Transform(
               transform: Matrix4.rotationY(_rotationAnimation.value * 2.0 * pi),
               alignment: Alignment.center,
-              child: Image.asset('assets/images/octagon.png', width: 200),
+              child: Image.asset('assets/images/palestra.png', width: 200),
             );
           },
         ),

@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
           BottomNavigationBarItem(
               icon: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, MatchScreen.routeName);
+                    Navigator.pushNamed(context, articleScreen.routeName);
                   },
                   icon: const Icon(Icons.person)),
               label: 'Cerca'),

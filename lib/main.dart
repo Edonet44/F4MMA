@@ -1,6 +1,7 @@
 import 'package:f4mma/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/screen.dart';
 
 // void main() {
@@ -12,7 +13,7 @@ import 'screens/screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(Myapp());
+  runApp(ProviderScope(child: Myapp()));
 }
 
 class Myapp extends StatelessWidget {

@@ -1,9 +1,18 @@
 import 'package:f4mma/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screens/screen.dart';
 
-void main() {
-  runApp(const Myapp());
+// void main() {
+
+//   runApp(const Myapp());
+
+// }
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(Myapp());
 }
 
 class Myapp extends StatelessWidget {

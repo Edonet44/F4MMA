@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'dart:async' show Future;
+import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 import '../model/cl_api_player.dart';
 
@@ -60,6 +62,10 @@ class Api {
 }
 
 class FirebaseStorageCRUD {
+//disabilita i certificati SSL
+  HttpClient httpClient = HttpClient()
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
 //create non utilizzata perche il file e' gia esistente
@@ -81,8 +87,12 @@ class FirebaseStorageCRUD {
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('gs://f4mma-bce65.appspot.com/players_config.json');
-      final data = await storageRef.getData();
-      final jsonString = utf8.decode(data!);
+      // final data = await storageRef.getData();
+      // final jsonString = utf8.decode(data!);
+      // return playerFromJson(jsonString);
+      final downloadUrl = await storageRef.getDownloadURL();
+      final response = await http.get(Uri.parse(downloadUrl));
+      final jsonString = response.body;
       return playerFromJson(jsonString);
     } catch (e) {
       print(e);

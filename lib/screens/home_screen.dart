@@ -1,6 +1,7 @@
 import 'package:f4mma/backend/api.dart';
 import 'package:f4mma/model/cl_atleta.dart';
 import 'package:flutter/material.dart';
+import '../backend/connectivity.dart';
 import '../model/cl_api_player.dart';
 import '../theme/theme.dart';
 import '../widget/bottom_nav_bar.dart';
@@ -56,6 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
 //       print(e);
 //     }
 //   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkInternetConnection();
+  }
 
   @override
   Widget build(BuildContext context) {

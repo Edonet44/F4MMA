@@ -55,7 +55,7 @@ class _MatchScreenState extends State<MatchScreen>
     player = await Api().loadJson();
 
     //utilizzo nel file crud api da utilizzare successivamente
-    //player = await FirebaseStorageCRUD().loadJson_storage();
+    // player = await FirebaseStorageCRUD().loadJson_storage();
 
     if (player != null) {
       setState(() {
@@ -199,7 +199,7 @@ clip_oval(String img, String nome, double larghezza, double altezza) {
         child: Column(
           children: [
             Container(
-              child: Text("Mr :$nome"),
+              child: Text("$nome"),
             )
           ],
         ),
@@ -222,22 +222,144 @@ class CclikMap extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset('assets/images/usa_map.png'))),
         GestureDetector(
-          //onTap: () => print('Alabama'),
-          onTap: () => _navigateToStateScreen(context, 'Alabama'),
+          onTap: () => _navigateToStateScreen(context, 'Florida'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
-            margin: EdgeInsets.only(left: 230, top: 140),
+            margin: EdgeInsets.only(left: 260, top: 180),
             width: 20,
             height: 20,
           ),
         ),
         GestureDetector(
-          onTap: () => print('Alaska'),
+          //onTap: () => print('Nevada'),
+          onTap: () => _navigateToStateScreen(context, 'Nevada'),
           child: Container(
-            color: Colors.transparent,
-            margin: EdgeInsets.only(left: 20, top: 70),
-            width: 100,
-            height: 100,
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 35, top: 80),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //onTap: () => print('Utah'),
+          onTap: () => _navigateToStateScreen(context, 'Utah'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: const EdgeInsets.only(left: 70, top: 90),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //  onTap: () => print('Arizona'),
+          onTap: () => _navigateToStateScreen(context, 'Arizona'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 60, top: 130),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          // onTap: () => print('Texas'),
+          onTap: () => _navigateToStateScreen(context, 'Texas'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 150, top: 160),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //ap: () => print('Missouri'),
+          onTap: () => _navigateToStateScreen(context, 'Missouri'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 185, top: 100),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //onTap: () => print('New York'),
+          onTap: () => _navigateToStateScreen(context, 'New York'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 280, top: 50),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //onTap: () => print('California'),
+          onTap: () => _navigateToStateScreen(context, 'California'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 20, top: 110),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          // onTap: () => print('Ohio'),
+          onTap: () => _navigateToStateScreen(context, 'Ohio'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 250, top: 80),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //  onTap: () => print('North Carolina'),
+          onTap: () => _navigateToStateScreen(context, 'North Carolina'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 270, top: 120),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          // onTap: () => print('Colorado'),
+          onTap: () => _navigateToStateScreen(context, 'Colorado'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 280, top: 50),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          //  onTap: () => print('Montana'),
+          onTap: () => _navigateToStateScreen(context, 'Montana'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 80, top: 30),
+            width: 20,
+            height: 20,
+          ),
+        ),
+        GestureDetector(
+          // onTap: () => print('Minnesota'),
+          onTap: () => _navigateToStateScreen(context, 'Minnesota'),
+          child: Container(
+            color: Color.fromARGB(255, 160, 8, 8),
+            //color: Colors.transparent,
+            margin: EdgeInsets.only(left: 170, top: 40),
+            width: 20,
+            height: 20,
           ),
         ),
       ],

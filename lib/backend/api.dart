@@ -63,9 +63,9 @@ class Api {
 
 class FirebaseStorageCRUD {
 //disabilita i certificati SSL
-  HttpClient httpClient = HttpClient()
-    ..badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
+  // HttpClient httpClient = HttpClient()
+  //   ..badCertificateCallback =
+  //       ((X509Certificate cert, String host, int port) => true);
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
 //create non utilizzata perche il file e' gia esistente
@@ -82,21 +82,46 @@ class FirebaseStorageCRUD {
   }
 
 //Fetch json file in storage firebase
+  // Future<List<Player>?> loadJson_storage() async {
+  //   try {
+  //     final storageRef = FirebaseStorage.instance
+  //         .ref()
+  //         .child('gs://f4mma-bce65.appspot.com/players_config.json');
+  //     // final data = await storageRef.getData();
+  //     // final jsonString = utf8.decode(data!);
+  //     // return playerFromJson(jsonString);
+  //     final downloadUrl = await storageRef.getDownloadURL();
+  //     final response = await http.get(Uri.parse(downloadUrl));
+  //     final jsonString = response.body;
+  //     return playerFromJson(jsonString);
+  //   } catch (e) {
+  //     print(e);
+  //     throw (e);
+  //   }
+  // }
   Future<List<Player>?> loadJson_storage() async {
     try {
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('gs://f4mma-bce65.appspot.com/players_config.json');
-      // final data = await storageRef.getData();
-      // final jsonString = utf8.decode(data!);
-      // return playerFromJson(jsonString);
-      final downloadUrl = await storageRef.getDownloadURL();
+
+      final downloadUrl = await _getDownloadUrl(storageRef);
+
       final response = await http.get(Uri.parse(downloadUrl));
       final jsonString = response.body;
       return playerFromJson(jsonString);
     } catch (e) {
-      print(e);
-      throw (e);
+      print('Error while loading JSON from Firebase Storage: $e');
+      return null;
+    }
+  }
+
+  Future<String> _getDownloadUrl(Reference ref) async {
+    try {
+      return await ref.getDownloadURL();
+    } catch (e) {
+      print('Error while getting download URL from Firebase Storage: $e');
+      throw e;
     }
   }
 

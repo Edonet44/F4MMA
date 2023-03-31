@@ -62,7 +62,8 @@ class _atleta_screenState extends State<atleta_screen>
                             borderRadius: BorderRadius.circular(15.0),
                             image: DecorationImage(
                                 image: AssetImage(items[4]),
-                                fit: BoxFit.cover)),
+                                fit: BoxFit.cover,
+                                alignment: Alignment.topCenter)),
                       ),
                     ),
                     Align(

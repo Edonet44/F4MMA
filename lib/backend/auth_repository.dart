@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRepository {
   final FirebaseAuth _auth;
   //restituisce uno stream di oggeti User
+  ////// Notifies about changes to the user's sign-in state (such as sign-in or
+  /// sign-out) and also token refresh events.
+
   Stream<User?> get authStateChange => _auth.idTokenChanges();
   AuthRepository(this._auth);
 //utente che si logga con mail e password

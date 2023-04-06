@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 ///
 ///Classe custom di circular progress indicator
-///da utilizzare in BLOC
 ///
 ///
 ///

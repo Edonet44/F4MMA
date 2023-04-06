@@ -8,6 +8,7 @@ import '../widget/bottom_nav_bar.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import '../widget/log_out.dart';
 import 'atleta_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -290,9 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // color: Colors.blue,
             margin: const EdgeInsets.only(top: 10),
             child: Column(
-              children: [
-                //  const Log_out(),
-              ],
+              children: [LogOut()],
             ),
           ),
         ],

@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:f4mma/model/cl_api_player.dart';
 import 'package:f4mma/model/cl_incontri.dart';
+import 'package:f4mma/screens/allenamento.dart';
 import 'package:f4mma/utils/app_large_text.dart';
 import 'package:f4mma/utils/app_text.dart';
 import 'package:flutter/material.dart';
 import '../backend/api.dart';
+import '../model/cl_palestre.dart';
 import '../theme/theme.dart';
 import '../widget/bottom_nav_bar.dart';
 
@@ -24,6 +26,9 @@ class _MatchScreenState extends State<MatchScreen>
   //lista di player
   List<Player>? player;
   var isLoaded = false;
+// //istanza classe palestre
+
+  PalestraIterable elenco_palestre = PalestraIterable();
 
   @override
   void initState() {
@@ -66,30 +71,30 @@ class _MatchScreenState extends State<MatchScreen>
 //
 
   //funzione che richiama la creazione dei match
-  Tomatch() {
-    try {
-      //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json
-      //aggiungo alla lista tutti i dati di ogni singolo giocatore
-      List<Giocatore> giocatori = [];
-      for (var atleta in player!) {
-        giocatori.add(atleta.giocatore1);
-        giocatori.add(atleta.giocatore2);
-        giocatori.add(atleta.giocatore3);
-        giocatori.add(atleta.giocatore4);
-        giocatori.add(atleta.giocatore5);
-        giocatori.add(atleta.giocatore6);
-        giocatori.add(atleta.giocatore7);
-        giocatori.add(atleta.giocatore8);
-        giocatori.add(atleta.giocatore9);
-        giocatori.add(atleta.giocatore10);
-      }
+  // Tomatch() {
+  //   try {
+  //     //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json
+  //     //aggiungo alla lista tutti i dati di ogni singolo giocatore
+  //     List<Giocatore> giocatori = [];
+  //     for (var atleta in player!) {
+  //       giocatori.add(atleta.giocatore1);
+  //       giocatori.add(atleta.giocatore2);
+  //       giocatori.add(atleta.giocatore3);
+  //       giocatori.add(atleta.giocatore4);
+  //       giocatori.add(atleta.giocatore5);
+  //       giocatori.add(atleta.giocatore6);
+  //       giocatori.add(atleta.giocatore7);
+  //       giocatori.add(atleta.giocatore8);
+  //       giocatori.add(atleta.giocatore9);
+  //       giocatori.add(atleta.giocatore10);
+  //     }
 
-      //istanza e richiamo funzione creamatch in classe cl_incontri con passaggio di variabile di tipo lista giocatore
-      Incontri().Creamatches(giocatori);
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     //istanza e richiamo funzione creamatch in classe cl_incontri con passaggio di variabile di tipo lista giocatore
+  //     Incontri().Creamatches(giocatori);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,30 +125,65 @@ class _MatchScreenState extends State<MatchScreen>
               child: Row(
                 children: [
                   Container(
-                    width: 150,
-                    child: Column(
-                      children: [
-                        animation_ufcoctagon(
-                            rotationAnimation: _rotationAnimation),
-                        ElevatedButton(
-                            onPressed: () {
-                              Tomatch();
-                            },
-                            child: Text("Combatti"))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 150,
-                    child: Column(
-                      children: [
-                        animation_allenamento(
-                            rotationAnimation: _rotationAnimation),
-                        ElevatedButton(
-                            onPressed: () {}, child: Text("Allenati"))
-                      ],
+                    height: 400,
+                    width: 300,
+                    child: ListView.builder(
+                      itemCount: elenco_palestre.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final Palestra palestra =
+                            elenco_palestre.elementAt(index);
+                        return ExpansionTile(
+                          leading: Icon(Icons.person),
+                          title: Text('${palestra.nome}'),
+                          children: [
+                            // leading: Image.asset(palestra.img ?? ''),
+                            // title: Text('${palestra.nome}'),
+                            // subtitle: Text('${palestra.luogo}'),
+                            // trailing: Text('\$${palestra.costo ?? ''}'),],
+                            Image.asset(palestra.img ?? ''),
+                            Text('${palestra.nome}'),
+                            Text('${palestra.luogo}'),
+                            Text('\$${palestra.costo ?? ''}'),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Allenamento(),
+                                      ));
+                                },
+                                child: Text('Scegli'))
+                          ],
+                        );
+                      },
                     ),
                   )
+                  // Container(
+                  //   width: 150,
+                  //   child: Column(
+                  //     children: [
+                  //       animation_ufcoctagon(
+                  //           rotationAnimation: _rotationAnimation),
+                  //       ElevatedButton(
+                  //           onPressed: () {
+                  //             Tomatch();
+                  //           },
+                  //           child: Text("Combatti"))
+                  //     ],
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: 150,
+                  //   child: Column(
+                  //     children: [
+                  //       animation_allenamento(
+                  //           rotationAnimation: _rotationAnimation),
+                  //       ElevatedButton(
+                  //           onPressed: () {}, child: Text("Allenati"))
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
             ),
@@ -222,7 +262,7 @@ class CclikMap extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset('assets/images/usa_map.png'))),
         GestureDetector(
-          onTap: () => _navigateToStateScreen(context, 'Florida'),
+          onTap: () => _navigateToStateScreen(context, 'Florida', ''),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             margin: EdgeInsets.only(left: 260, top: 180),
@@ -232,7 +272,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //onTap: () => print('Nevada'),
-          onTap: () => _navigateToStateScreen(context, 'Nevada'),
+          onTap: () => _navigateToStateScreen(context, 'Nevada',
+              'La T-Mobile Arena è un\'arena al coperto polivalente a Paradise, Nevada. Inaugurato il 6 aprile 2016, è l\'arena di casa dei Vegas Golden Knights della National Hockey League (NHL). Una joint venture tra MGM Resorts International e Anschutz Entertainment Group (AEG), T-Mobile Arena si trova sulla Strip di Las Vegas dietro gli hotel casinò New York-New York e Park MGM. '),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -243,7 +284,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //onTap: () => print('Utah'),
-          onTap: () => _navigateToStateScreen(context, 'Utah'),
+          onTap: () => _navigateToStateScreen(context, 'Utah',
+              'Vivint Arena, precedentemente nota come EnergySolutions Arena e Vivint Smart Home Arena, è un\'arena al coperto situata a Salt Lake City, nello Utah. L\'arena funge da sede dello Utah Jazz della National Basketball Association (NBA) ed è stata la sede di altre squadre atletiche professionistiche. Ha 18.306 posti a sedere per il basket, 14.000 per l\'hockey su ghiaccio e il calcio indoor e 20.000 per i concerti. Dispone inoltre di 56 suite di lusso e 668 posti club.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -254,7 +296,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //  onTap: () => print('Arizona'),
-          onTap: () => _navigateToStateScreen(context, 'Arizona'),
+          onTap: () => _navigateToStateScreen(context, 'Arizona',
+              'Footprint Center (precedentemente noto come America West Arena, US Airways Center, [10] Talking Stick Resort Arena e Phoenix Suns Arena) è un\'arena polivalente a Phoenix, in Arizona. Costruito nel centro abitato regionale degli Stati Uniti sudoccidentali, il arena è stata inaugurata il 6 giugno 1992, con un costo di costruzione di \$ 89 milioni.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -265,7 +308,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           // onTap: () => print('Texas'),
-          onTap: () => _navigateToStateScreen(context, 'Texas'),
+          onTap: () => _navigateToStateScreen(context, 'Texas',
+              'L\'AT&T Center è un\'arena al coperto polivalente sul lato est di San Antonio, Texas, Stati Uniti. È la sede dei San Antonio Spurs della National Basketball Association. L\'arena può ospitare 18.418 posti a sedere per il basket e 19.000 per concerti o raduni e contiene 2.018 posti a sedere nei club, 50 suite di lusso e 32 bagni. È stato aperto nel 2002 come SBC Center, con un costo di 175 milioni di dollari USA, finanziato da obbligazioni emesse dalla contea, che sono state sostenute da un aumento delle tasse per l\'occupazione degli hotel e dell\'autonoleggio e un contributo aggiuntivo di 28,5 milioni di dollari dal Speroni.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -276,7 +320,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //ap: () => print('Missouri'),
-          onTap: () => _navigateToStateScreen(context, 'Missouri'),
+          onTap: () => _navigateToStateScreen(context, 'Missouri',
+              'Il T-Mobile Center (precedentemente Sprint Center) è un\'arena polivalente nel centro di Kansas City, Missouri. Si trova all\'incrocio tra la 14th Street e il Grand Boulevard sul lato est del Power & Light District. È diventata effettivamente la principale arena al coperto della città, un ruolo precedentemente ricoperto dalla Kemper Arena, che era stata costruita nel 1974 a pochi chilometri di distanza nel quartiere di West Bottoms.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -287,7 +332,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //onTap: () => print('New York'),
-          onTap: () => _navigateToStateScreen(context, 'New York'),
+          onTap: () => _navigateToStateScreen(context, 'New York',
+              'Il Madison Square Garden, noto colloquialmente come The Garden o con le sue iniziali MSG, è un\'arena al coperto polivalente a New York City. Si trova a Midtown Manhattan tra la Settima e l\'Ottava Avenue dalla 31a alla 33a Strada, sopra la Pennsylvania Station. È la quarta sede a portare il nome "Madison Square Garden"; i primi due (1879 e 1890) si trovavano a Madison Square, sulla East 26th Street e Madison Avenue, con il terzo Madison Square Garden (1925) più in alto in Eighth Avenue e 50th Street.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -298,7 +344,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //onTap: () => print('California'),
-          onTap: () => _navigateToStateScreen(context, 'California'),
+          onTap: () => _navigateToStateScreen(context, 'California',
+              'L\'Honda Center (precedentemente noto come Arrowhead Pond of Anaheim) è un\'arena al coperto situata ad Anaheim, in California. L\'arena ospita gli Anaheim Ducks della National Hockey League.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -309,7 +356,8 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           // onTap: () => print('Ohio'),
-          onTap: () => _navigateToStateScreen(context, 'Ohio'),
+          onTap: () => _navigateToStateScreen(context, 'Ohio',
+              'La Nationwide Arena è un\'arena polivalente nel distretto Arena di Columbus, Ohio. Dal completamento nel 2000, l\'arena è stata la sede delle Columbus Blue Jackets della National Hockey League (NHL). È una delle due strutture di Columbus, insieme al Greater Columbus Convention Center, che ospita eventi durante l\'annuale Arnold Classic, un evento sportivo e di fitness ospitato dall\'attore, bodybuilder ed ex governatore della California Arnold Schwarzenegger.'),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -320,7 +368,7 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //  onTap: () => print('North Carolina'),
-          onTap: () => _navigateToStateScreen(context, 'North Carolina'),
+          onTap: () => _navigateToStateScreen(context, 'North Carolina', ''),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -331,7 +379,7 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           // onTap: () => print('Colorado'),
-          onTap: () => _navigateToStateScreen(context, 'Colorado'),
+          onTap: () => _navigateToStateScreen(context, 'Colorado', ''),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -342,7 +390,7 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           //  onTap: () => print('Montana'),
-          onTap: () => _navigateToStateScreen(context, 'Montana'),
+          onTap: () => _navigateToStateScreen(context, 'Montana', ''),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -353,7 +401,7 @@ class CclikMap extends StatelessWidget {
         ),
         GestureDetector(
           // onTap: () => print('Minnesota'),
-          onTap: () => _navigateToStateScreen(context, 'Minnesota'),
+          onTap: () => _navigateToStateScreen(context, 'Minnesota', ''),
           child: Container(
             color: Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
@@ -366,25 +414,144 @@ class CclikMap extends StatelessWidget {
     );
   }
 
-  void _navigateToStateScreen(BuildContext context, String stateName) {
+  void _navigateToStateScreen(
+      BuildContext context, String stateName, String description) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => StateScreen(stateName)),
+      MaterialPageRoute(
+          builder: (context) => StateScreen(stateName, description)),
     );
   }
 }
 
-class StateScreen extends StatelessWidget {
+class StateScreen extends StatefulWidget {
   final String stateName;
+  final String description;
 
-  StateScreen(this.stateName);
+  StateScreen(this.stateName, this.description);
+
+  @override
+  State<StateScreen> createState() => _StateScreenState();
+}
+
+class _StateScreenState extends State<StateScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _rotationAnimation;
+  //lista di player
+  List<Player>? player;
+  var isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+    _rotationAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+    _animationController.repeat();
+    getdata();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+//recupero json e passo alla lista di tipo player
+  getdata() async {
+    player = await Api().loadJson();
+
+    //utilizzo nel file crud api da utilizzare successivamente
+    // player = await FirebaseStorageCRUD().loadJson_storage();
+
+    if (player != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
+//
+
+  //funzione che richiama la creazione dei match
+  Tomatch() {
+    try {
+      //creo una lista di giocatori tramite un for che itera tutti i giocatori passati dal json
+      //aggiungo alla lista tutti i dati di ogni singolo giocatore
+      List<Giocatore> giocatori = [];
+      for (var atleta in player!) {
+        giocatori.add(atleta.giocatore1);
+        giocatori.add(atleta.giocatore2);
+        giocatori.add(atleta.giocatore3);
+        giocatori.add(atleta.giocatore4);
+        giocatori.add(atleta.giocatore5);
+        giocatori.add(atleta.giocatore6);
+        giocatori.add(atleta.giocatore7);
+        giocatori.add(atleta.giocatore8);
+        giocatori.add(atleta.giocatore9);
+        giocatori.add(atleta.giocatore10);
+      }
+
+      //istanza e richiamo funzione creamatch in classe cl_incontri con passaggio di variabile di tipo lista giocatore
+      Incontri().Creamatches(giocatori);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(stateName)),
+      appBar: AppBar(title: Text(widget.stateName)),
       body: Center(
-        child: Text('Informazioni su $stateName'),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text('Informazioni su ${widget.stateName}'),
+              ],
+            ),
+            Row(
+              children: [
+                RichText(
+                    text: TextSpan(children: <TextSpan>[
+                  TextSpan(
+                    text: 'Questo è il primo paragrafo. ${widget.description}',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ]))
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 150,
+                  child: Column(
+                    children: [
+                      //richiama classe per animazione
+                      animation_ufcoctagon(
+                          rotationAnimation: _rotationAnimation),
+                      ElevatedButton(
+                          onPressed: () {
+                            Tomatch();
+                          },
+                          child: Text("Combatti"))
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

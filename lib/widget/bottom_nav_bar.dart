@@ -1,3 +1,4 @@
+import 'package:f4mma/screens/statistic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -36,7 +37,7 @@ class BottomNavBar extends StatelessWidget {
           BottomNavigationBarItem(
               icon: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, articleScreen.routeName);
+                    Navigator.pushNamed(context, MyStatitics.routeName);
                   },
                   icon: const Icon(Icons.search)),
               label: 'Profilo')

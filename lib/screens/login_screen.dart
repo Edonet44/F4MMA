@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../widget/google_log.dart';
 import 'vm/login_state.dart';
 import 'vm/login_controller.dart';
 
@@ -76,6 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                   ),
                 ),
+
                 TextButton(
                   onPressed: () {
                     //forgot password screen
@@ -96,7 +98,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     )),
                 Row(
                   children: <Widget>[
-                    const Text(
+                    Text(
                       'Does not have account?',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -108,7 +110,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       onPressed: () {
                         //signup screen
                       },
-                    )
+                    ),
+                    Text("Log with Google"),
+                    GoogleSignInButton(
+                        onPressed: ref
+                            .read(LoginControllerProvider.notifier)
+                            .login_withGoogle())
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),

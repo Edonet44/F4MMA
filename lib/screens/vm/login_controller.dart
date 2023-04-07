@@ -1,5 +1,6 @@
 import 'package:f4mma/providers/users/user_provider.dart';
 import 'package:f4mma/screens/vm/login_state.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 ///
@@ -18,7 +19,7 @@ class LoginController extends StateNotifier<LoginState> {
 //An object used by providers to interact with other providers and the life-cycles of the application.
   final Ref ref;
 
-//funzione di login
+//login mail password
   void login(String email, String password) async {
     state = const LoginStateLoading();
     try {
@@ -26,6 +27,17 @@ class LoginController extends StateNotifier<LoginState> {
       await ref
           .read(authRepositoryProvider)
           .SingInWithEmailAndPassword(email, password);
+      state = const LoginStateSuccess();
+    } catch (e) {
+      state = LoginStateError(e.toString());
+    }
+  }
+
+//login con google
+  login_withGoogle() async {
+    state = const LoginStateLoading();
+    try {
+      await ref.read(authRepositoryProvider).SingInWithGoogle();
       state = const LoginStateSuccess();
     } catch (e) {
       state = LoginStateError(e.toString());

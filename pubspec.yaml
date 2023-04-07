@@ -33,11 +33,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   email_validator: ^2.0.1
   equatable: ^2.0.5
+  flame: ^1.7.1
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
   firebase_core_platform_interface: ^4.5.1
   firebase_storage: ^11.0.16
-  flame: ^1.7.1
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.3.2
@@ -99,6 +99,7 @@ flutter:
     - assets/images/bckg.png
     - assets/images/modelli/mma_ufcman.obj
     - assets/images/punching-bag.png
+    - assets/images/G_Logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../backend/auth_repository.dart';
 
 //inizializzo il provider per FIREBASE
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepository(FirebaseAuth.instance);
+  final firebaseAuth = FirebaseAuth.instance;
+  final googleSignIn = GoogleSignIn();
+  return AuthRepository(firebaseAuth, googleSignIn);
 });
 //RICHIAMO LA CLASSE STREAM PASSANDOGLI UN GENERICO IN QUESTO CASO IL MODELLO USER DI FIREBASE
 final authStateProvider = StreamProvider<User?>((ref) {

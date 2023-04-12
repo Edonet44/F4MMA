@@ -1,13 +1,13 @@
-import 'package:flame/components.dart';
+//import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/experimental.dart';
-import '../model/cl_palestre.dart';
-import 'package:flame/sprite.dart';
-import 'package:vector_math/vector_math.dart' as vmath;
-import 'package:flame/sprite.dart';
+// import 'package:flame/flame.dart';
+// import 'package:flame/game.dart';
+// import 'package:flame/palette.dart';
+// import 'package:flame/experimental.dart';
+// import '../model/cl_palestre.dart';
+// import 'package:flame/sprite.dart';
+// import 'package:vector_math/vector_math.dart' as vmath;
+// import 'package:flame/sprite.dart';
 
 class Allenamento extends StatelessWidget {
   const Allenamento({super.key});

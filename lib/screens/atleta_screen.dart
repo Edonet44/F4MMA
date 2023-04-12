@@ -115,8 +115,6 @@ class _atleta_screenState extends State<atleta_screen>
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(
                         onPressed: () {
-                          //funzione che richiama il bloc...
-
                           Navigator.push(
                               context,
                               MaterialPageRoute(

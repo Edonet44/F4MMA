@@ -11,8 +11,13 @@ class AuthRepository {
   //successivamente provare ad inserire anche il log con microsoft
   //final MicrosoftAuthProvider _microsoftAuthCredential;
 
+//è un metodo che restituisce uno stream di valori di tipo User?.
   Stream<User?> get authStateChange => _auth.idTokenChanges();
+//authstateChange restituisce uno stream
+  Stream<User?> get userStream => _auth.authStateChanges();
+  //costruttore
   AuthRepository(this._auth, this._googleSignIn);
+
 //utente che si logga con mail e password
   Future<User?> SingInWithEmailAndPassword(
       String email, String password) async {
@@ -34,7 +39,7 @@ class AuthRepository {
 
 //minuto 39.28 https://www.youtube.com/watch?v=B8Sx7wGiY-s&t=2160s
   //utente che si logga con gmail
-  Future<User?> SingInWithGoogle() async {
+  void SingInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
@@ -42,6 +47,9 @@ class AuthRepository {
           await googleUser?.authentication;
       final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+//passa le credenziali ad UserCredential
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw AuthException('Utente Google non trovato');
@@ -51,6 +59,21 @@ class AuthRepository {
       } else {
         throw AuthException('Errore. provare nuovamente.');
       }
+    }
+  }
+
+  Future<void> signUp({required String email, required String password}) async {
+    try {
+      final UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

@@ -1,7 +1,7 @@
 class Strings {
   Strings._();
 
-  static const String APP_NOME = "Il mondo delle api";
+  static const String APP_NOME = "Nome applicazione";
   static const String APP_TAG = "Benvenuto nel BeeQuiz!";
   static const String READY_TO = "Pronto per partire?";
   static const String READY_GO =

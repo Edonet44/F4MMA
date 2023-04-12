@@ -18,7 +18,9 @@ class Api {
           await rootBundle.loadString('assets/api/players_config.json');
       return playerFromJson(jsonString);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     throw (e);
   }

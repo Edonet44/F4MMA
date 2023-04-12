@@ -5,25 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../screens/vm/login_controller.dart';
 
-class login_withGoogle extends StatefulHookConsumerWidget {
-  const login_withGoogle({super.key});
-
-  @override
-  ConsumerState<login_withGoogle> createState() => _login_withGoogleState();
-}
-
-class _login_withGoogleState extends ConsumerState<login_withGoogle> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(
-          child: Text("LogOut"),
-          onPressed: () {
-            ref.read(LoginControllerProvider.notifier).login_withGoogle();
-          }),
-    );
-  }
-}
+//oggetto che crea un pulsante elevatedbutton con immagine di google e passa una funzione
+//in questo caso utilizza poi nel login_screen il
 
 class GoogleSignInButton extends StatefulHookConsumerWidget {
   final Function onPressed;

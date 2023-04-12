@@ -34,10 +34,10 @@ class LoginController extends StateNotifier<LoginState> {
   }
 
 //login con google
-  login_withGoogle() async {
+  void login_withGoogle() async {
     state = const LoginStateLoading();
     try {
-      await ref.read(authRepositoryProvider).SingInWithGoogle();
+      ref.read(authRepositoryProvider).SingInWithGoogle();
       state = const LoginStateSuccess();
     } catch (e) {
       state = LoginStateError(e.toString());

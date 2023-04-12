@@ -14,6 +14,12 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 final authStateProvider = StreamProvider<User?>((ref) {
   return ref.read(authRepositoryProvider).authStateChange;
 });
+//Provider che ritorna lo User e sente le modifiche grazie ad authstatechange del repository
+final userProvider = StreamProvider<User?>((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  return authRepository.userStream;
+});
+
 //per capire bene bisogna vedere il costruttore:
 ///
 ///NB:
@@ -81,3 +87,7 @@ class User {
   /// 2 MODELLO QUINDI CLASSE 
   /// 3 INIZIALIZZAZIONE DEI PROVIDERS CON RICHIAMO DELLA CLASSE
   /// 4 GESTIONE DELLA UI 
+  /// 
+  
+
+ 

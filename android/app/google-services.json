@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1052862712934",
+    "firebase_url": "https://f4mma-bce65-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "f4mma-bce65",
     "storage_bucket": "f4mma-bce65.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1052862712934-2ksh2571i2umfl66gljsakv1c11nl985.apps.googleusercontent.com",
+          "client_id": "1052862712934-e4lhf6slgpvr722n1j2qtli6j05iihgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.f4mma",
+            "certificate_hash": "24a8a8daf5a4f202ccbeaa39eb1ce09b7267be05"
+          }
+        },
+        {
+          "client_id": "1052862712934-ljtlp02e80cj8c7g4upm9ednug2el6gd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

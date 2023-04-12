@@ -1,3 +1,4 @@
+import 'package:f4mma/screens/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../widget/google_log.dart';
@@ -17,6 +18,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    //ref.listen ascolta i cambiamenti di stato LoginState in un LoginControllerProvider
+//spiegazione funzione
+//     void listen<T>(
+//   ProviderListenable<T> provider,
+//   void Function(T?, T) listener, {
+//   void Function(Object, StackTrace)? onError,
+// })
+// La funzione ref.listen prende due parametri: il primo è l'oggetto da ascoltare (in questo caso LoginControllerProvider),
+//  il secondo è una funzione da eseguire ogni volta che lo stato cambia.
+// Questa funzione prende due argomenti: previous (lo stato precedente) e state (lo stato attuale).
     ref.listen<LoginState>(LoginControllerProvider, ((previous, state) {
       if (state is LoginStateError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -34,93 +45,105 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.all(10),
-            child: ListView(
-              children: <Widget>[
-                // Container(
-                //     alignment: Alignment.center,
-                //     padding: const EdgeInsets.all(10),
-                //     child: const Text(
-                //       'TemiCodes',
-                //       style: TextStyle(
-                //           color: Colors.blue,
-                //           fontWeight: FontWeight.w500,
-                //           fontSize: 30),
-                //     )),
-                Padding(padding: EdgeInsets.only(top: 200)),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email Address',
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                    ),
-                  ),
+          padding: const EdgeInsets.all(10),
+          child: ListView(children: <Widget>[
+            // Container(
+            //     alignment: Alignment.center,
+            //     padding: const EdgeInsets.all(10),
+            //     child: const Text(
+            //       'TemiCodes',
+            //       style: TextStyle(
+            //           color: Colors.blue,
+            //           fontWeight: FontWeight.w500,
+            //           fontSize: 30),
+            //     )),
+            Padding(padding: EdgeInsets.only(top: 200)),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                style: TextStyle(color: Colors.white),
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email Address',
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
                 ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      labelText: 'Password',
-                      labelStyle: TextStyle(color: Colors.white),
-                    ),
-                  ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: TextField(
+                style: TextStyle(color: Colors.white),
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.white),
                 ),
+              ),
+            ),
 
-                TextButton(
+            TextButton(
+              onPressed: () {
+                //forgot password screen
+              },
+              child: const Text(
+                'Forgot Password',
+              ),
+            ),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
                   onPressed: () {
-                    //forgot password screen
+                    ref
+                        .read(LoginControllerProvider.notifier)
+                        .login(emailController.text, passwordController.text);
                   },
-                  child: const Text(
-                    'Forgot Password',
-                  ),
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Does not have account?',
+                  style: TextStyle(color: Colors.white),
                 ),
-                Container(
-                    height: 50,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: ElevatedButton(
-                      child: const Text('Login'),
-                      onPressed: () {
-                        ref.read(LoginControllerProvider.notifier).login(
-                            emailController.text, passwordController.text);
-                      },
-                    )),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Does not have account?',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    TextButton(
-                      child: const Text(
-                        'Sign in',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        //signup screen
-                      },
-                    ),
-                    Text("Log with Google"),
-                    GoogleSignInButton(
-                        onPressed: ref
-                            .read(LoginControllerProvider.notifier)
-                            .login_withGoogle())
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
+                TextButton(
+                  child: const Text(
+                    'Sign up',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    //to register pageNavigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const Modulo1());
+                  },
                 ),
               ],
-            )),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: GoogleSignInButton(
+                      onPressed: () {
+                        ref
+                            .read(LoginControllerProvider.notifier)
+                            .login_withGoogle();
+                      },
+                    ),
+                  ),
+                )
+              ],
+            )
+          ]),
+        )
       ]),
     );
   }
@@ -201,7 +224,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 //                       _showPasswordTextField = true;
 //                       _showRegistrationForm = false;
 //                     });
-
 
 //                   },
 //                   child: Text(
@@ -291,239 +313,4 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 //     );
 //   }
 // }
-
-// class Modulo1 extends StatefulWidget {
-//   const Modulo1({Key? key}) : super(key: key);
-
-//   @override
-//   State<Modulo1> createState() => _Modulo1State();
-// }
-
-// class _Modulo1State extends State<Modulo1> {
-//   double _opacity = 0.0;
-//   final _formKey = GlobalKey<FormState>();
-//   final _nome = TextEditingController();
-//   final _cognome = TextEditingController();
-//   final _telefono = TextEditingController();
-//   final _mail = TextEditingController();
-//   final _ora = TextEditingController();
-//   //array per tipi di massaggi
-//   List<String> drop_Ditems = [
-//     'GALLO',
-//     'LEGGERI',
-//     'WALTER',
-//     'MEDI',
-//     'MASSIMI',
-//   ];
-//   String? selezionato_dropdwon = 'GALLO';
-//   String name = "";
-//   @override
-//   void initState() {
-//     super.initState();
-//     //aggiungi questo codice per far apparire gradualmente il modulo
-//     Future.delayed(const Duration(milliseconds: 500), () {
-//       setState(() {
-//         _opacity = 1.0;
-//       });
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final double altezza = MediaQuery.of(context).size.height;
-//     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-//     return AnimatedOpacity(
-//       opacity: _opacity,
-//       duration: const Duration(seconds: 1),
-//       child: SingleChildScrollView(
-//         child: Container(
-//             margin: EdgeInsets.only(top: 10),
-//             color: Colors.amberAccent,
-//             height: 400,
-//             width: MediaQuery.of(context).size.width,
-//             padding: const EdgeInsets.only(left: 40, right: 40),
-//             child: SingleChildScrollView(
-//               child: Form(
-//                   key: _formKey,
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       SizedBox(
-//                           height: altezza * 0.04,
-//                           width: MediaQuery.of(context).size.width * 0.06),
-//                       const Text("",
-//                           style: TextStyle(
-//                               fontSize: 40,
-//                               color: Color.fromARGB(255, 247, 241, 241))),
-
-//                       SizedBox(height: altezza * 0.04),
-//                       //campo nome
-//                       TextFormField(
-//                           keyboardType: TextInputType.name,
-//                           controller: _nome,
-//                           decoration: const InputDecoration(
-//                             hintText: 'Nome',
-//                             border: OutlineInputBorder(),
-//                             enabledBorder: OutlineInputBorder(
-//                               borderSide: BorderSide(
-//                                 color: Colors.white,
-//                                 width: 2.0,
-//                               ),
-//                             ),
-//                           ),
-//                           style: TextStyle(color: Colors.white),
-//                           autovalidateMode: AutovalidateMode.onUserInteraction,
-//                           //se il valore è diverso da nullo e il validatore e ok altrimenti inserisci una mail valida
-//                           validator: (value) {
-//                             if (value != null) {
-//                               return null;
-//                             }
-//                           }),
-//                       const SizedBox(height: 10),
-//                       //campo congome
-
-//                       TextFormField(
-//                           keyboardType: TextInputType.text,
-//                           controller: _cognome,
-//                           decoration: const InputDecoration(
-//                             hintText: "Email",
-//                             border: OutlineInputBorder(),
-//                             enabledBorder: OutlineInputBorder(
-//                               borderSide: BorderSide(
-//                                 color: Colors.white,
-//                                 width: 2.0,
-//                               ),
-//                             ),
-//                           ),
-//                           style: TextStyle(color: Colors.white),
-//                           autovalidateMode: AutovalidateMode.onUserInteraction,
-//                           validator: (value) {
-//                             if (value != null) {
-//                               return null;
-//                             }
-//                           }),
-//                       const SizedBox(height: 10),
-//                       // TextFormField(
-//                       //     keyboardType: TextInputType.phone,
-//                       //     controller: _telefono,
-//                       //     decoration: const InputDecoration(
-//                       //       hintText: "Telefono",
-//                       //       border: OutlineInputBorder(),
-//                       //       enabledBorder: OutlineInputBorder(
-//                       //         borderSide: BorderSide(
-//                       //           color: Colors.white,
-//                       //           width: 2.0,
-//                       //         ),
-//                       //       ),
-//                       //     ),
-//                       //     autovalidateMode: AutovalidateMode.onUserInteraction,
-//                       //     validator: (value) {
-//                       //       if (value != null && value.length < 7) {
-//                       //         return "Devi inserire il telefono";
-//                       //       } else {
-//                       //         return null;
-//                       //       }
-//                       //     }),
-//                       const SizedBox(height: 10),
-//                       SizedBox(
-//                         width: MediaQuery.of(context).size.width,
-//                         child: Container(
-//                           decoration: BoxDecoration(
-//                             border: Border.all(color: Colors.white),
-//                             borderRadius: BorderRadius.circular(10.0),
-//                           ),
-//                           child: DropdownButton(
-//                             style: TextStyle(
-//                               color: Colors
-//                                   .white, // imposta il colore del testo su bianco
-//                               fontSize: 16, // imposta la dimensione del font
-//                             ),
-//                             value: selezionato_dropdwon,
-//                             items: drop_Ditems
-//                                 .map((item) => DropdownMenuItem<String>(
-//                                       value: item,
-//                                       child: Text(
-//                                         item,
-//                                         style: const TextStyle(fontSize: 16),
-//                                       ),
-//                                     ))
-//                                 .toList(),
-//                             onChanged: (item) => setState(
-//                                 () => selezionato_dropdwon = item as String?),
-//                             underline: Container(),
-//                           ),
-//                         ),
-//                       ),
-
-//                       const SizedBox(height: 10),
-//                       // TextFormField(
-//                       //   keyboardType: TextInputType.datetime,
-//                       //   controller: _mail,
-//                       //   decoration: const InputDecoration(
-//                       //     hintText: "email",
-//                       //     border: OutlineInputBorder(),
-//                       //     enabledBorder: OutlineInputBorder(
-//                       //       borderSide: BorderSide(
-//                       //         color: Colors.white,
-//                       //         width: 2.0,
-//                       //       ),
-//                       //     ),
-//                       //   ),
-//                       //   autovalidateMode: AutovalidateMode.onUserInteraction,
-//                       // ),
-//                       // const SizedBox(height: 10),
-//                       // TextFormField(
-//                       //   keyboardType: TextInputType.datetime,
-//                       //   controller: _ora,
-//                       //   decoration: const InputDecoration(
-//                       //     border: OutlineInputBorder(),
-//                       //     enabledBorder: OutlineInputBorder(
-//                       //       borderSide: BorderSide(
-//                       //         color: Colors.white,
-//                       //         width: 2.0,
-//                       //       ),
-//                       //     ),
-//                       //   ),
-//                       //   autovalidateMode: AutovalidateMode.onUserInteraction,
-//                       // ),
-//                       // const SizedBox(height: 10),
-//                       //creare anche una lista di radiobutton per la selezione dei vari pagamenti
-//                       //https://www.youtube.com/watch?v=WPge1ZuEeCQ
-//                       const SizedBox(height: 18),
-//                       SizedBox(
-//                         width: MediaQuery.of(context).size.width * 0.8,
-//                         child: ElevatedButton(
-//                           onPressed: () {
-//                             _convalida_form(context);
-//                           },
-//                           child: const Text(
-//                             'ISCRIVITI',
-//                             style:
-//                                 TextStyle(fontFamily: 'Verdana', fontSize: 18),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   )),
-//             )),
-//       ),
-//     );
-//   }
-
-  // void _convalida_form(BuildContext context) {
-  //   if (_formKey.currentState!.validate()) {
-  //     //attivare provider
-  //     //esempio di utilizzo di bloc
-  //     /*
-  //     BlocProvider.of<ModuloBloc>(context).add(Create(
-  //         _nome.text,
-  //         _cognome.text,
-  //         _telefono.text,
-  //         selezionato_dropdwon!,
-  //         _mail.text,
-  //         _ora.text));
-  //   }
-  //   */
-  //   }
-  // }
 

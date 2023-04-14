@@ -1,9 +1,11 @@
-import 'package:f4mma/screens/register_page.dart';
+import 'package:f4mma/screens/screen.dart';
+import 'package:f4mma/screens/vm/Register/register_screen.dart';
+import 'package:f4mma/widget/circular_progress_indicator.dart';
+import 'package:f4mma/widget/google_log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../widget/google_log.dart';
-import 'vm/login_state.dart';
-import 'vm/login_controller.dart';
+import 'login_state.dart';
+import 'login_controller.dart';
 
 class LoginPage extends StatefulHookConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -33,6 +35,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.error),
         ));
+      }
+      //se utente loggato vai homescreen
+      if (state is LoginStateSuccess) {
+       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
       }
     }));
 
@@ -93,7 +99,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 //forgot password screen
               },
               child: const Text(
-                'Forgot Password',
+                'Password dimenticata?',
               ),
             ),
             Container(
@@ -111,17 +117,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'Does not have account?',
+                  'Non hai un account?',
                   style: TextStyle(color: Colors.white),
                 ),
                 TextButton(
                   child: const Text(
-                    'Sign up',
+                    'Iscriviti',
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    //to register pageNavigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const Modulo1());
+                    //to register page
+                    Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const Modulo1()));
                   },
                 ),
               ],

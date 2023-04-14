@@ -1,6 +1,7 @@
 import 'package:f4mma/providers/users/user_provider.dart';
 import 'package:f4mma/screens/home_screen.dart';
 import 'package:f4mma/screens/screen.dart';
+import 'package:f4mma/screens/vm/Login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,11 +47,21 @@ import '../widget/circular_progress_indicator.dart';
 //   }
 // }
 
+
+///Classe che utilizza lo [StreamProvider] nella cartella providers/user/user_provider.dart
+/// e se utente è diverso da nullo -> vai ad HomeScreen
+///         altrimenti -> vai a LoginPage
+///
+///nb notare che il watch dentro lo scaffold
+///
+
+
 class Authck extends ConsumerWidget {
   const Authck({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //richiamo dello StreamProvider nel file Userprovider.dart
     final _authState = ref.watch(authStateProvider);
 
     return _authState.when(

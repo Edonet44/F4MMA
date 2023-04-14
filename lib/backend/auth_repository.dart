@@ -39,6 +39,8 @@ class AuthRepository {
 
 //minuto 39.28 https://www.youtube.com/watch?v=B8Sx7wGiY-s&t=2160s
   //utente che si logga con gmail
+  //mi raccomando quando si crea questo tipo di login con google di avere entrambe le certificazioni sh1 e sh256
+  //altrimenti da errore
   void SingInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -81,6 +83,7 @@ class AuthRepository {
   Future<void> singOut() async {
     await _auth.signOut();
   }
+  
 }
 
 //classe per gestire le eccezioni

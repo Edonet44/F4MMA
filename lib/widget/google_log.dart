@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../screens/vm/login_controller.dart';
+import '../screens/vm/Login/login_controller.dart';
 
 //oggetto che crea un pulsante elevatedbutton con immagine di google e passa una funzione
 //in questo caso utilizza poi nel login_screen il

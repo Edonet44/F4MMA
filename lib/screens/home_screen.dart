@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Home'),
+          title: const Text('F4MMA'),
           automaticallyImplyLeading: false,
         ),
         bottomNavigationBar: const BottomNavBar(index: 0),
@@ -83,13 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                child: Row(
+                child:const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "F4MMA",
-                      style: IntestazioneTitolo,
-                    ),
+                    // Text(
+                    //   "F4MMA",
+                    //   style: IntestazioneTitolo,
+                    // ),
                   ],
                 ),
               ),
@@ -100,11 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     "CombatGames",
                     style: IntestazioneTitolo,
                   ),
+                  _info_bar(context),
                 ],
               )
             ],
           ),
-          _info_bar(context),
+          //_info_bar(context),
           const Divider(),
           const Carousel(),
           Row(
@@ -150,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                     //color: Colors.amber,
                     child: Column(children: [
-                  Row(
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Image.asset(
@@ -271,14 +272,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _info_bar(context) {
     return Container(
-      // color: Colors.yellow,
+      //color: Colors.yellow,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             //   color: Colors.amber,
             margin: const EdgeInsets.only(left: 20, right: 50, top: 10),
-            child: Column(
+            child: const Column(
               children: [
                 /* Text(
                   "Oggi : " + DateFormat.yMMMMd().format(DateTime.now()),

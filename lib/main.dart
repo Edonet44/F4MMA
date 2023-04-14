@@ -1,5 +1,4 @@
 import 'package:f4mma/screens/home_screen.dart';
-import 'package:f4mma/screens/login_screen.dart';
 import 'package:f4mma/screens/statistic_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +30,8 @@ class Myapp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
         ),
+       // darkTheme: ThemeData.dark(),
+        
         //come home richiama la classe Authck che fa il ceck su i dati
         home: const Authck(),
         initialRoute: '/',
@@ -38,6 +39,7 @@ class Myapp extends StatelessWidget {
           HomeScreen.routeName: (context) => const HomeScreen(),
           articleScreen.routeName: (context) => const articleScreen(),
           MyStatitics.routeName: (context) => const MyStatitics(),
+          SettingScreen.routeName:(context)=>const SettingScreen()
         });
   }
 }

@@ -11,6 +11,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(firebaseAuth, googleSignIn);
 });
 //RICHIAMO LA CLASSE STREAM PASSANDOGLI UN GENERICO IN QUESTO CASO IL MODELLO USER DI FIREBASE
+//questo authStateProvider viene utilizzato nella classe Autck per la connettività
 final authStateProvider = StreamProvider<User?>((ref) {
   return ref.read(authRepositoryProvider).authStateChange;
 });
@@ -19,6 +20,8 @@ final userProvider = StreamProvider<User?>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return authRepository.userStream;
 });
+//provider per gestire i temi
+final themeProvider=StateProvider((ref) => bool);
 
 //per capire bene bisogna vedere il costruttore:
 ///

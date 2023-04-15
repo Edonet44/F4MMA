@@ -287,7 +287,7 @@ class CclikMap extends StatelessWidget {
           onTap: () => _navigateToStateScreen(context, 'Utah',
               'Vivint Arena, precedentemente nota come EnergySolutions Arena e Vivint Smart Home Arena, è un\'arena al coperto situata a Salt Lake City, nello Utah. L\'arena funge da sede dello Utah Jazz della National Basketball Association (NBA) ed è stata la sede di altre squadre atletiche professionistiche. Ha 18.306 posti a sedere per il basket, 14.000 per l\'hockey su ghiaccio e il calcio indoor e 20.000 per i concerti. Dispone inoltre di 56 suite di lusso e 668 posti club.'),
           child: Container(
-            color: Color.fromARGB(255, 160, 8, 8),
+            color: const Color.fromARGB(255, 160, 8, 8),
             //color: Colors.transparent,
             margin: const EdgeInsets.only(left: 70, top: 90),
             width: 20,
@@ -544,7 +544,7 @@ class _StateScreenState extends State<StateScreen>
                           onPressed: () {
                             Tomatch();
                           },
-                          child: Text("Combatti"))
+                          child: const Text("Combatti"))
                     ],
                   ),
                 ),

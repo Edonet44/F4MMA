@@ -1,39 +1,30 @@
 import 'package:f4mma/providers/users/user_provider.dart';
 import 'package:f4mma/screens/screen.dart';
-import 'package:f4mma/screens/vm/Register/register_controller.dart';
+import 'package:f4mma/screens/vm/Forgot_password/password_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-//final authProvider = Provider<AuthController>((ref) => AuthController());
+import '../../../theme/theme.dart';
 
 
-class Modulo1 extends StatefulHookConsumerWidget {
-  const Modulo1({Key? key}) : super(key: key);
+
+
+class Modulo2 extends StatefulHookConsumerWidget {
+  const Modulo2({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<Modulo1> createState() => _Modulo1State();
+  ConsumerState<Modulo2> createState() => _Modulo2State();
 }
 
-class _Modulo1State extends ConsumerState<Modulo1> {
+class _Modulo2State extends ConsumerState<Modulo2> {
   double _opacity = 0.0;
   final _formKey = GlobalKey<FormState>();
   final _mail = TextEditingController();
-  final _password = TextEditingController();
-  // final _telefono = TextEditingController();
-  // final _mail = TextEditingController();
-  // final _ora = TextEditingController();
-  //array per tipi di massaggi
-  List<String> drop_Ditems = [
-    'GALLO',
-    'LEGGERI',
-    'WALTER',
-    'MEDI',
-    'MASSIMI',
-  ];
-  String? selezionato_dropdwon = 'GALLO';
-  String name = "";
+  
+  
+  
   @override
   void initState() {
     super.initState();
@@ -54,7 +45,7 @@ class _Modulo1State extends ConsumerState<Modulo1> {
           children:[
             Positioned.fill(
           child: Image.asset(
-            'assets/images/body-registration.jpg',
+            'assets/images/recover_password.png',
             fit: BoxFit.cover,
           ),
         ),
@@ -78,21 +69,21 @@ class _Modulo1State extends ConsumerState<Modulo1> {
                                 SizedBox(
                                     height: altezza * 0.04,
                                     width: MediaQuery.of(context).size.width * 0.06),
-                                const Text("Modulo di Iscrizione",
+                                const Text("Recupera Password",
                                     style: TextStyle(
                                         fontSize: 40,
                                         color: Color.fromARGB(255, 247, 241, 241))),
-                    
+                                    RichText(text: TextSpan(style: Forgot_password,text: 'Inserisci la tua mail per avere una nuova password') ),
                                 SizedBox(height: altezza * 0.04),
                                 //campo nome
                                 TextFormField(
                                     keyboardType: TextInputType.name,
                                     controller: _mail,
                                     decoration: const InputDecoration(
-                                      hintText: 'Mail',
+                                      hintText: ' Email',
                                        hintStyle: TextStyle(
-                                   color: Colors.white, // Imposta il colore del testo dell'hint su bianco
-                                                ),
+                                color: Colors.white, // Imposta il colore del testo dell'hint su bianco
+                                           ),
                                       border: OutlineInputBorder(),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -110,59 +101,7 @@ class _Modulo1State extends ConsumerState<Modulo1> {
                                       }
                                     }),
                                 const SizedBox(height: 10),
-                                //campo congome
-                    
-                                TextFormField(
-                                  
-                                    keyboardType: TextInputType.visiblePassword,
-                                    controller: _password,
-                                    decoration: const InputDecoration(
-                                      hintText: "Password",
-                                       hintStyle: TextStyle(
-      color: Colors.white, // Imposta il colore del testo dell'hint su bianco
-    ),
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                          width: 2.0,
-                                        ),
-                                      ),
-                                    ),
-                                    style: TextStyle(color: Colors.white),
-                                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value != null) {
-                                        return null;
-                                      }
-                                    }),
-                                const SizedBox(height: 10),
-                                // TextFormField(
-                                //     keyboardType: TextInputType.phone,
-                                //     controller: _telefono,
-                                //     decoration: const InputDecoration(
-                                //       hintText: "Telefono",
-                                //       border: OutlineInputBorder(),
-                                //       enabledBorder: OutlineInputBorder(
-                                //         borderSide: BorderSide(
-                                //           color: Colors.white,
-                                //           width: 2.0,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                //     validator: (value) {
-                                //       if (value != null && value.length < 7) {
-                                //         return "Devi inserire il telefono";
-                                //       } else {
-                                //         return null;
-                                //       }
-                                //     }),
-                                const SizedBox(height: 10),
-                                
-                                //creare anche una lista di radiobutton per la selezione dei vari pagamenti
-                                //https://www.youtube.com/watch?v=WPge1ZuEeCQ
-                                //const SizedBox(height: 18),
+                                const SizedBox(height: 18),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.8,
                                   child: ElevatedButton(
@@ -171,7 +110,7 @@ class _Modulo1State extends ConsumerState<Modulo1> {
                                       _convalida_form(context, ref);
                                     },
                                     child: const Text(
-                                      'ISCRIVITI',
+                                      'Recupera Password',
                                       style:
                                           TextStyle(fontFamily: 'Verdana', fontSize: 18),
                                     ),
@@ -212,8 +151,8 @@ class _Modulo1State extends ConsumerState<Modulo1> {
 //controllo lato client del form
   void _convalida_form(BuildContext context, WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
-      ref
-                            .watch(SignUpProvider.notifier).register(_mail.text, _password.text);   
+      // ref
+      //                       .watch(SignUpProvider.notifier).register(_mail.text);   
     }
   }
 }

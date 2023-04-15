@@ -19,11 +19,11 @@ TextStyle get IntestazioneTitolo {
           color: Colors.black45, fontSize: 22, fontWeight: FontWeight.bold));
 }
 
-//--------------------------------------------Appuntamenti----------------------------------------
-TextStyle get IntestazioneTitolo_Lista {
+//--------------------------------------------Modulo 2----------------------------------------
+TextStyle get Forgot_password {
   return GoogleFonts.lato(
       textStyle: TextStyle(
-          color: Color.fromARGB(115, 19, 18, 18),
+          color: Color.fromARGB(115, 232, 227, 227),
           fontSize: 20,
           fontWeight: FontWeight.bold));
 }

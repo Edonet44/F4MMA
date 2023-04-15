@@ -28,20 +28,31 @@ class _TinderAnimationState extends State<TinderAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Transform.rotate(
-          angle: _controller.value * 2.0 * 3.14,
-          child: SizedBox(
-            width: widget.size,
-            height: widget.size,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
-            ),
+    return Scaffold(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row( 
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return Transform.rotate(
+                    angle: _controller.value * 2.0 * 3.14,
+                    child: SizedBox(
+                      width: widget.size,
+                      height: widget.size,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 

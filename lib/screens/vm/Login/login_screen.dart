@@ -4,6 +4,7 @@ import 'package:f4mma/widget/circular_progress_indicator.dart';
 import 'package:f4mma/widget/google_log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../Forgot_password/password_screen.dart';
 import 'login_state.dart';
 import 'login_controller.dart';
 
@@ -96,7 +97,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
             TextButton(
               onPressed: () {
-                //forgot password screen
+                Future.delayed(Duration(seconds: 2)).then((_) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const Modulo2()),
+              );
+            });
               },
               child: const Text(
                 'Password dimenticata?',
@@ -127,8 +132,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                   onPressed: () {
                     //to register page
-                    Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const Modulo1()));
+                    
+Future.delayed(Duration(seconds: 2)).then((_) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const Modulo1()),
+              );
+            });
+
+
+
                   },
                 ),
               ],

@@ -151,8 +151,8 @@ class _Modulo2State extends ConsumerState<Modulo2> {
 //controllo lato client del form
   void _convalida_form(BuildContext context, WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
-      // ref
-      //                       .watch(SignUpProvider.notifier).register(_mail.text);   
+       ref
+                            .watch(PassUpdProvider.notifier).update(_mail.text);   
     }
   }
 }

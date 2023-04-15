@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'error_handle.dart';
+
+
+// vedere questo https://github.com/dev-tayy/fuzzy-eureka/tree/master/lib per la gestione errori e il repository
+
 class AuthRepository {
   final FirebaseAuth _auth;
   //restituisce uno stream di oggeti User
@@ -8,6 +13,7 @@ class AuthRepository {
   /// sign-out) and also token refresh events.
   //variabile per accesso utente con google
   final GoogleSignIn _googleSignIn;
+  static late AuthStatus _status;
   //successivamente provare ad inserire anche il log con microsoft
   //final MicrosoftAuthProvider _microsoftAuthCredential;
 
@@ -79,20 +85,13 @@ class AuthRepository {
     }
   }
 
-
-// Future<void>update_User({required String email, required String password}){
-// try {
-//   _auth.sendPasswordResetEmail(email: email);
-// } on FirebaseAuthException catch (e){
-//   if (e.code == 'weak-password') {
-//         print('The password provided is too weak.');
-//       } else if (e.code == 'email-already-in-use') {
-//         print('The account already exists for that email.');
-//       }
-// }catch (e){
-// print(e);
-// }
-// }
+Future<AuthStatus>update_User({required String email}) async{
+await _auth
+        .sendPasswordResetEmail(email: email)
+        .then((value) => _status = AuthStatus.successful)
+        .catchError((e) => _status = AuthExceptionHandler.handleAuthException(e));
+    return _status;
+}
 
 
   //utente che esce dal login
